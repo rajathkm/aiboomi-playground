@@ -18,12 +18,13 @@ export function FloatingCTA() {
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 1.5, duration: 0.6, ease: "easeOut" }}
-      className="fixed bottom-6 right-4 sm:right-8 z-50 flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(232,165,48,0.4)] active:scale-[0.97] safe-bottom"
+      className="fixed right-4 sm:right-8 z-50 flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(232,165,48,0.4)] active:scale-[0.97]"
       style={{
         background: "linear-gradient(135deg, #e8a530, #f0b84a)",
         color: "#0a0a2e",
         fontFamily: "var(--font-body)",
         boxShadow: "0 4px 24px rgba(232, 165, 48, 0.35)",
+        bottom: "calc(env(safe-area-inset-bottom, 0px) + 24px)",
       }}
     >
       <span className="hidden sm:inline">Register for</span>{" "}

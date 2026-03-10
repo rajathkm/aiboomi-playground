@@ -92,7 +92,36 @@ body::after {
 
 /* Safe area insets for notched phones */
 .safe-bottom {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0px);
+}
+
+/* Prevent iOS Safari zoom on form controls */
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
+/* Prevent iOS auto-zoom on focused inputs */
+input,
+textarea,
+select {
+  font-size: max(16px, 1em);
+}
+
+/* Prevent horizontal overflow on all viewports */
+main, .wall-masonry {
+  overflow-x: hidden;
+}
+
+/* Horizontal scroll containers — smooth touch */
+.persona-scroll {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  scrollbar-width: none;
+}
+.persona-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 /* Smooth scrollbar styling for chat areas */

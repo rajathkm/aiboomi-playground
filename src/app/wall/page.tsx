@@ -218,7 +218,7 @@ export default function WallPage() {
         }}
       />
 
-      <div className="relative z-[1] max-w-[1200px] mx-auto px-6 sm:px-8 pt-10 pb-[280px] sm:pb-[260px]">
+      <div className="relative z-[1] max-w-[1200px] mx-auto px-4 sm:px-8 pt-10 pb-[300px] sm:pb-[280px]">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -406,13 +406,14 @@ export default function WallPage() {
 
       {/* Fixed bottom submit area */}
       <div
-        className="fixed bottom-0 left-0 right-0 z-40 safe-bottom"
+        className="fixed bottom-0 left-0 right-0 z-40"
         style={{
           background: "rgba(5,5,16,0.9)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           borderTop: "1px solid rgba(255,255,255,0.08)",
-          padding: "20px 24px",
+          padding: "16px 16px",
+          paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 16px)",
         }}
       >
         <div className="max-w-[700px] mx-auto">

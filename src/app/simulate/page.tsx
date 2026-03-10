@@ -311,7 +311,7 @@ export default function SimulatePage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.25 }}
-          className="flex gap-3 overflow-x-auto pb-1 -mx-1 px-1"
+          className="persona-scroll flex gap-3 overflow-x-auto pb-1 -mx-1 px-1"
           style={{ scrollbarWidth: "none" }}
         >
           {AI_PERSONAS.map((persona) => (
