@@ -395,13 +395,13 @@ export default function BuildVsBuyPage() {
 
   return (
     <main
-      className="min-h-screen flex flex-col items-center"
+      className="flex min-h-screen flex-col items-center overflow-x-hidden"
       style={{
         background:
           "linear-gradient(180deg, #050510 0%, #0d0525 40%, #1a0a3e 100%)",
       }}
     >
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 sm:py-16 w-full max-w-2xl">
+      <div className="safe-floating-space flex flex-1 w-full max-w-3xl flex-col items-center justify-center px-4 py-8 pb-28 sm:px-6 sm:py-16 sm:pb-20 lg:px-8">
         <AnimatePresence mode="wait">
           {/* ─── INTRO SCREEN ─────────────────────────────────── */}
           {phase === "intro" && (
@@ -414,13 +414,13 @@ export default function BuildVsBuyPage() {
               className="flex flex-col items-center text-center w-full"
             >
               <motion.h1
-                className="text-5xl sm:text-6xl font-extrabold tracking-tight mb-4"
+                className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl"
                 style={{ fontFamily: "var(--font-display)" }}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <span className="mr-3 text-4xl sm:text-5xl">&#9889;</span>
+                <span className="mr-3 text-3xl sm:text-4xl lg:text-5xl">&#9889;</span>
                 <span
                   className="bg-clip-text text-transparent"
                   style={{
@@ -502,7 +502,7 @@ export default function BuildVsBuyPage() {
                 disabled={isLoading}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="min-h-[60px] px-10 sm:px-14 py-5 rounded-2xl text-lg font-bold cursor-pointer disabled:cursor-not-allowed transition-all duration-300"
+                className="min-h-[60px] w-full rounded-2xl px-10 py-5 text-lg font-bold cursor-pointer transition-all duration-300 disabled:cursor-not-allowed sm:w-auto sm:px-14"
                 style={{
                   background: isLoading
                     ? "rgba(255,255,255,0.08)"
@@ -594,7 +594,7 @@ export default function BuildVsBuyPage() {
                     boxShadow: "0 0 40px rgba(139,92,246,0.4)",
                   }}
                   whileTap={{ scale: 0.97 }}
-                  className="flex-1 min-h-[56px] sm:min-h-[64px] py-4 sm:py-5 rounded-2xl text-lg sm:text-xl font-bold cursor-pointer transition-all duration-200"
+                  className="min-h-[56px] w-full rounded-2xl py-4 text-lg font-bold cursor-pointer transition-all duration-200 sm:min-h-[64px] sm:flex-1 sm:py-5 sm:text-xl"
                   style={{
                     background:
                       "linear-gradient(135deg, #6d28d9, #7c3aed, #8b5cf6)",
@@ -612,7 +612,7 @@ export default function BuildVsBuyPage() {
                     boxShadow: "0 0 40px rgba(34,197,94,0.4)",
                   }}
                   whileTap={{ scale: 0.97 }}
-                  className="flex-1 min-h-[56px] sm:min-h-[64px] py-4 sm:py-5 rounded-2xl text-lg sm:text-xl font-bold cursor-pointer transition-all duration-200"
+                  className="min-h-[56px] w-full rounded-2xl py-4 text-lg font-bold cursor-pointer transition-all duration-200 sm:min-h-[64px] sm:flex-1 sm:py-5 sm:text-xl"
                   style={{
                     background:
                       "linear-gradient(135deg, #15803d, #16a34a, #22c55e)",

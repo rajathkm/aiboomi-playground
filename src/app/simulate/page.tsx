@@ -198,7 +198,7 @@ export default function SimulatePage() {
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden flex flex-col items-center"
+      className="relative flex min-h-screen flex-col items-center overflow-x-hidden"
       style={{
         background:
           "linear-gradient(180deg, #050510 0%, #0a0a2e 50%, #1a1055 100%)",
@@ -230,7 +230,7 @@ export default function SimulatePage() {
         />
       </div>
 
-      <div className="relative z-10 flex min-h-screen w-full max-w-3xl flex-col gap-5 px-6 py-8 sm:gap-6 sm:px-8">
+      <div className="safe-floating-space relative z-10 flex min-h-screen w-full max-w-3xl flex-col gap-5 px-4 py-8 sm:gap-6 sm:px-6 sm:py-10 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -239,7 +239,7 @@ export default function SimulatePage() {
           className="text-center"
         >
           <h1
-            className="mb-2 text-2xl font-bold tracking-tight sm:text-3xl"
+            className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
             style={{
               fontFamily: "var(--font-display)",
               background:
@@ -306,18 +306,17 @@ export default function SimulatePage() {
           )}
         </motion.div>
 
-        {/* Persona cards row */}
+        {/* Persona cards */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.25 }}
-          className="persona-scroll flex gap-3 overflow-x-auto pb-1 -mx-1 px-1"
-          style={{ scrollbarWidth: "none" }}
+          className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2"
         >
           {AI_PERSONAS.map((persona) => (
             <div
               key={persona.name}
-              className="flex flex-shrink-0 items-center gap-2.5 rounded-xl border border-white/[0.06] transition-all duration-300 min-h-[48px]"
+              className="flex min-h-[48px] items-center gap-2.5 rounded-xl border border-white/[0.06] transition-all duration-300"
               style={{
                 padding: "10px 14px",
                 background:
@@ -359,7 +358,6 @@ export default function SimulatePage() {
                   style={{
                     fontFamily: "var(--font-mono)",
                     color: "var(--gray-500)",
-                    maxWidth: "120px",
                   }}
                 >
                   {persona.stage}
@@ -563,7 +561,7 @@ export default function SimulatePage() {
                     : "Jump into the conversation..."
               }
               disabled={isLoading || showReveal}
-              className="flex-1 border-none bg-transparent text-sm outline-none placeholder:text-white/20"
+              className="flex-1 border-none bg-transparent text-base outline-none placeholder:text-white/20"
               style={{
                 fontFamily: "var(--font-body)",
                 color: "var(--white)",
@@ -599,10 +597,10 @@ export default function SimulatePage() {
         </motion.div>
 
         {/* Restart + Nav */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 pb-6">
+        <div className="flex w-full flex-col items-stretch justify-between gap-3 pt-4 pb-6 sm:flex-row sm:items-center">
           <button
             onClick={handleRestart}
-            className="min-h-[48px] px-5 py-3 text-xs rounded-xl transition-all duration-200 hover:text-white/80 hover:bg-white/5"
+            className="min-h-[48px] w-full rounded-xl px-5 py-3 text-xs transition-all duration-200 hover:bg-white/5 hover:text-white/80 sm:w-auto"
             style={{
               fontFamily: "var(--font-mono)",
               color: "var(--gray-500)",

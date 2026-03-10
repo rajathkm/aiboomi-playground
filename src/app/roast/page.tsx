@@ -139,12 +139,12 @@ export default function RoastPage() {
 
   return (
     <main
-      className="min-h-screen flex flex-col items-center"
+      className="flex min-h-screen flex-col items-center overflow-x-hidden"
       style={{
         background: "linear-gradient(180deg, #050510 0%, #1a0a00 100%)",
       }}
     >
-      <div className="flex-1 flex flex-col items-center justify-center px-6 pt-16 pb-12 sm:pt-20 sm:pb-20 w-full max-w-2xl">
+      <div className="safe-floating-space flex flex-1 w-full max-w-3xl flex-col items-center justify-center px-4 pt-16 sm:px-6 sm:pt-20 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -153,10 +153,10 @@ export default function RoastPage() {
           className="text-center mb-12"
         >
           <h1
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4"
+            className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            <span className="text-2xl sm:text-3xl md:text-4xl mr-2">{"\uD83D\uDD25"}</span>
+            <span className="mr-2 text-2xl sm:text-3xl lg:text-4xl">{"\uD83D\uDD25"}</span>
             <span
               className="bg-clip-text text-transparent"
               style={{
@@ -242,7 +242,7 @@ export default function RoastPage() {
                 disabled={!canSubmit}
                 whileHover={canSubmit ? { scale: 1.03 } : {}}
                 whileTap={canSubmit ? { scale: 0.97 } : {}}
-                className="mt-6 w-full min-h-[56px] py-4 rounded-2xl text-base sm:text-lg font-bold transition-all duration-300 cursor-pointer disabled:cursor-not-allowed"
+                className="mt-6 min-h-[56px] w-full rounded-2xl py-4 text-base font-bold transition-all duration-300 cursor-pointer disabled:cursor-not-allowed sm:w-auto sm:px-10 sm:text-lg"
                 style={{
                   background: canSubmit
                     ? "linear-gradient(135deg, #f97316, #ef4444)"
@@ -311,7 +311,7 @@ export default function RoastPage() {
                 }}
               >
                 <p
-                  className="text-base sm:text-lg md:text-xl leading-relaxed text-white/90"
+                  className="break-words text-base leading-relaxed text-white/90 sm:text-lg md:text-xl"
                   style={{ fontFamily: "var(--font-mono)" }}
                 >
                   <TypewriterText text={result.roast} />
@@ -365,7 +365,7 @@ export default function RoastPage() {
               <div className="mt-6 w-full">
                 <ShareCard gameName="roast">
                   <p
-                    className="text-base sm:text-lg italic text-white/90"
+                    className="break-words text-base italic text-white/90 sm:text-lg"
                     style={{ fontFamily: "var(--font-mono)" }}
                   >
                     &ldquo;{result.roast}&rdquo;

@@ -29,6 +29,7 @@
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-xl: 28px;
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 * {
@@ -39,13 +40,15 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   font-family: var(--font-body);
   background: var(--navy-deep);
   color: var(--white);
-  overflow-x: hidden;
+  overflow-x: clip;
+  padding-bottom: var(--safe-area-bottom);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -92,25 +95,27 @@ body::after {
 
 /* Safe area insets for notched phones */
 .safe-bottom {
-  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0px);
+  padding-bottom: max(var(--safe-area-bottom), 0.25rem);
+}
+
+.safe-floating-space {
+  padding-bottom: calc(var(--safe-area-bottom) + 6.5rem);
+}
+@media (min-width: 640px) {
+  .safe-floating-space {
+    padding-bottom: calc(var(--safe-area-bottom) + 2.5rem);
+  }
 }
 
 /* Prevent iOS Safari zoom on form controls */
 input,
 textarea,
 select {
-  font-size: 16px;
-}
-
-/* Prevent iOS auto-zoom on focused inputs */
-input,
-textarea,
-select {
-  font-size: max(16px, 1em);
+  font-size: max(16px, 1rem);
 }
 
 /* Prevent horizontal overflow on all viewports */
-main, .wall-masonry {
+main {
   overflow-x: hidden;
 }
 

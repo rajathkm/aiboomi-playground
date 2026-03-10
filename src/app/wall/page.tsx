@@ -218,7 +218,7 @@ export default function WallPage() {
         }}
       />
 
-      <div className="relative z-[1] max-w-[1200px] mx-auto px-4 sm:px-8 pt-10 pb-[300px] sm:pb-[280px]">
+      <div className="relative z-[1] mx-auto w-full max-w-3xl px-4 pt-10 pb-[320px] sm:px-6 sm:pb-[300px] lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -227,10 +227,9 @@ export default function WallPage() {
           className="text-center mb-8"
         >
           <h1
-            className="font-extrabold text-white mb-3"
+            className="mb-3 text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl"
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
             }}
           >
             <span role="img" aria-label="brick">
@@ -239,12 +238,10 @@ export default function WallPage() {
             The Anti-Pitch Wall
           </h1>
           <p
-            className="mx-auto leading-relaxed"
+            className="mx-auto max-w-[560px] text-base leading-relaxed sm:text-lg"
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "clamp(0.95rem, 2vw, 1.15rem)",
               color: "rgba(255,255,255,0.6)",
-              maxWidth: 560,
               lineHeight: 1.6,
             }}
           >
@@ -292,19 +289,8 @@ export default function WallPage() {
           )}
         </AnimatePresence>
 
-        {/* Masonry Wall */}
-        <div
-          className="wall-masonry"
-          style={{ columnCount: 1, columnGap: 16 }}
-        >
-          <style>{`
-            @media (min-width: 640px) {
-              .wall-masonry { column-count: 2 !important; }
-            }
-            @media (min-width: 1024px) {
-              .wall-masonry { column-count: 3 !important; }
-            }
-          `}</style>
+        {/* Wall posts */}
+        <div className="grid grid-cols-1 gap-4">
           <AnimatePresence mode="popLayout">
             {entries.map((entry) => {
               const cat = CATEGORY_CONFIG[entry.category];
@@ -320,8 +306,6 @@ export default function WallPage() {
                   transition={{ duration: 0.3 }}
                   className="rounded-2xl p-6"
                   style={{
-                    breakInside: "avoid",
-                    marginBottom: 16,
                     background: "#18181b",
                     border: `1px solid ${getBorderColor(entry.upvotes)}`,
                     boxShadow: getGlowIntensity(entry.upvotes),
@@ -364,7 +348,7 @@ export default function WallPage() {
                     onClick={() => handleUpvote(entry.id)}
                     disabled={isUpvoted}
                     aria-label={`Upvote${isUpvoted ? "d" : ""} (${entry.upvotes})`}
-                    className="inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-full transition-all duration-200"
+                    className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-full px-4 py-2 transition-all duration-200"
                     style={{
                       border: isUpvoted
                         ? "1px solid rgba(0,204,102,0.3)"
@@ -406,14 +390,12 @@ export default function WallPage() {
 
       {/* Fixed bottom submit area */}
       <div
-        className="fixed bottom-0 left-0 right-0 z-40"
+        className="safe-bottom fixed bottom-0 left-0 right-0 z-40 px-4 py-4 sm:px-6 lg:px-8"
         style={{
           background: "rgba(5,5,16,0.9)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           borderTop: "1px solid rgba(255,255,255,0.08)",
-          padding: "16px 16px",
-          paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 16px)",
         }}
       >
         <div className="max-w-[700px] mx-auto">
@@ -463,7 +445,7 @@ export default function WallPage() {
           </div>
 
           {/* Input row */}
-          <div className="flex gap-3 items-center">
+          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
             <div className="flex-1 relative">
               <input
                 type="text"
@@ -484,7 +466,7 @@ export default function WallPage() {
                   padding: "14px 60px 14px 20px",
                   background: "rgba(255,255,255,0.05)",
                   color: "#fff",
-                  fontSize: "0.9rem",
+                  fontSize: "1rem",
                   fontFamily: "var(--font-mono)",
                 }}
               />
@@ -507,7 +489,7 @@ export default function WallPage() {
             <button
               onClick={handleSubmit}
               disabled={!text.trim() || isSubmitting}
-              className="min-h-[52px] px-6 rounded-xl font-bold whitespace-nowrap transition-all duration-200"
+              className="min-h-[52px] w-full rounded-xl px-6 font-bold whitespace-nowrap transition-all duration-200 sm:w-auto"
               style={{
                 border: "none",
                 background:

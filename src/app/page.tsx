@@ -36,7 +36,7 @@ export default function HomePage() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main className="relative min-h-screen overflow-x-hidden">
       {/* Animated gradient mesh background */}
       <div
         className="pointer-events-none fixed inset-0 z-0"
@@ -97,7 +97,7 @@ export default function HomePage() {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 py-20 sm:px-8 lg:px-12">
+      <div className="safe-floating-space relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         {/* Code comment — terminal aesthetic */}
         <motion.p
           initial={{ opacity: 0, y: -10 }}
@@ -117,7 +117,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="mb-6 text-center text-4xl font-bold leading-none tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+          className="mb-6 text-center text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
           style={{
             fontFamily: "var(--font-display)",
             background: "linear-gradient(135deg, #ffffff 0%, #d4b8ff 50%, #e8a530 100%)",
@@ -170,7 +170,7 @@ export default function HomePage() {
         </motion.p>
 
         {/* Game cards grid */}
-        <div className="mb-14 grid w-full max-w-4xl grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
+        <div className="mb-14 grid w-full max-w-4xl grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
           {GAMES.map((game, i) => (
             <motion.div
               key={game.id}
@@ -280,7 +280,7 @@ export default function HomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.35 }}
           onClick={handleRandomize}
-          className="group relative mb-10 flex min-h-[52px] cursor-pointer items-center gap-3 overflow-hidden rounded-full border border-white/10 px-8 py-4 text-sm font-semibold tracking-wide transition-all duration-300 hover:border-white/20 hover:scale-105 active:scale-95"
+          className="group relative mb-10 flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-full border border-white/10 px-8 py-4 text-sm font-semibold tracking-wide transition-all duration-300 hover:border-white/20 hover:scale-105 active:scale-95 sm:w-auto"
           style={{
             fontFamily: "var(--font-mono)",
             background: "rgba(255, 255, 255, 0.04)",
