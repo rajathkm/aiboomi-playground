@@ -30,20 +30,19 @@ export function ShareCard({ gameName, children, className = "" }: ShareCardProps
   }, [gameName]);
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-5 w-full max-w-md mx-auto">
       <div
         ref={cardRef}
-        className={`relative overflow-hidden rounded-2xl p-8 ${className}`}
+        className={`relative overflow-hidden rounded-2xl p-6 sm:p-8 w-full ${className}`}
         style={{
           background: "linear-gradient(135deg, #0a0a2e 0%, #2d1b69 50%, #6b4fa0 100%)",
-          minWidth: 360,
           maxWidth: 500,
         }}
       >
         {/* AIBoomi branding */}
         <div className="flex items-center gap-2 mb-6">
           <span
-            className="text-sm font-bold px-2 py-0.5 rounded"
+            className="text-sm font-bold px-2.5 py-1 rounded"
             style={{ background: "#e8a530", color: "#0a0a2e", fontFamily: "var(--font-body)" }}
           >
             AI
@@ -72,7 +71,7 @@ export function ShareCard({ gameName, children, className = "" }: ShareCardProps
 
       <button
         onClick={handleDownload}
-        className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 hover:scale-105 cursor-pointer"
+        className="flex items-center justify-center gap-2 px-7 py-3.5 min-h-[48px] text-sm font-semibold rounded-xl transition-all duration-200 hover:scale-105 hover:bg-white/15 active:scale-[0.97] cursor-pointer"
         style={{
           background: "rgba(255,255,255,0.1)",
           color: "rgba(255,255,255,0.8)",

@@ -97,13 +97,13 @@ export default function HomePage() {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-5 py-16 sm:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col items-center justify-center px-6 py-20 sm:px-8 lg:px-12">
         {/* Code comment — terminal aesthetic */}
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-6 text-xs tracking-widest sm:text-sm"
+          className="mb-8 text-xs tracking-widest sm:text-sm"
           style={{
             fontFamily: "var(--font-mono)",
             color: "var(--gray-500)",
@@ -117,7 +117,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="mb-5 text-center text-4xl font-bold leading-none tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+          className="mb-6 text-center text-4xl font-bold leading-none tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           style={{
             fontFamily: "var(--font-display)",
             background: "linear-gradient(135deg, #ffffff 0%, #d4b8ff 50%, #e8a530 100%)",
@@ -134,7 +134,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45 }}
-          className="mb-4 max-w-2xl text-center text-base leading-relaxed sm:text-lg md:text-xl"
+          className="mb-5 max-w-2xl text-center text-base leading-relaxed sm:text-lg md:text-xl"
           style={{
             fontFamily: "var(--font-body)",
             color: "var(--gray-200)",
@@ -151,7 +151,7 @@ export default function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.65 }}
-          className="mb-12 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-xs tracking-wider sm:text-sm"
+          className="mb-14 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-center text-xs tracking-[0.15em] sm:text-sm"
           style={{
             fontFamily: "var(--font-mono)",
             color: "var(--gray-400)",
@@ -170,7 +170,7 @@ export default function HomePage() {
         </motion.p>
 
         {/* Game cards grid */}
-        <div className="mb-10 grid w-full max-w-4xl grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
+        <div className="mb-14 grid w-full max-w-4xl grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
           {GAMES.map((game, i) => (
             <motion.div
               key={game.id}
@@ -184,8 +184,10 @@ export default function HomePage() {
             >
               <Link href={game.href} className="group block">
                 <div
-                  className="relative overflow-hidden rounded-2xl border border-white/[0.06] p-6 transition-all duration-300 ease-out group-hover:scale-[1.03] sm:p-7"
+                  className="relative overflow-hidden transition-all duration-300 ease-out group-hover:scale-[1.03] p-6 sm:p-8"
                   style={{
+                    borderRadius: 20,
+                    border: "1px solid rgba(255,255,255,0.1)",
                     background: BG_GRADIENTS[game.id],
                     backdropFilter: "blur(20px)",
                     WebkitBackdropFilter: "blur(20px)",
@@ -195,8 +197,9 @@ export default function HomePage() {
                 >
                   {/* Hover glow effect */}
                   <div
-                    className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                     style={{
+                      borderRadius: 20,
                       boxShadow: `0 0 40px ${GLOW_COLORS[game.id]}, inset 0 0 40px ${GLOW_COLORS[game.id]}`,
                     }}
                   />
@@ -211,7 +214,7 @@ export default function HomePage() {
 
                   <div className="relative z-10 flex items-start gap-4">
                     <div
-                      className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl text-2xl transition-transform duration-300 group-hover:scale-110"
+                      className="flex h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0 items-center justify-center rounded-2xl text-xl sm:text-2xl transition-transform duration-300 group-hover:scale-110"
                       style={{
                         background: `${BORDER_COLORS[game.id]}15`,
                         border: `1px solid ${BORDER_COLORS[game.id]}30`,
@@ -221,7 +224,7 @@ export default function HomePage() {
                     </div>
                     <div className="flex-1">
                       <h2
-                        className="mb-1.5 text-lg font-bold tracking-tight sm:text-xl"
+                        className="mb-2 text-lg font-bold tracking-tight sm:text-xl"
                         style={{
                           fontFamily: "var(--font-display)",
                           color: "var(--white)",
@@ -243,7 +246,7 @@ export default function HomePage() {
 
                   {/* Play arrow indicator */}
                   <div
-                    className="absolute bottom-5 right-5 flex h-8 w-8 items-center justify-center rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-2 sm:bottom-6 sm:right-6"
+                    className="absolute bottom-6 right-6 flex h-8 w-8 items-center justify-center rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-2"
                     style={{
                       background: `${BORDER_COLORS[game.id]}20`,
                       border: `1px solid ${BORDER_COLORS[game.id]}40`,
@@ -277,7 +280,7 @@ export default function HomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.35 }}
           onClick={handleRandomize}
-          className="group relative mb-6 flex cursor-pointer items-center gap-3 overflow-hidden rounded-full border border-white/10 px-7 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 hover:border-white/20 hover:scale-105 active:scale-95"
+          className="group relative mb-10 flex min-h-[52px] cursor-pointer items-center gap-3 overflow-hidden rounded-full border border-white/10 px-8 py-4 text-sm font-semibold tracking-wide transition-all duration-300 hover:border-white/20 hover:scale-105 active:scale-95"
           style={{
             fontFamily: "var(--font-mono)",
             background: "rgba(255, 255, 255, 0.04)",
@@ -308,7 +311,7 @@ export default function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.55 }}
-          className="text-center text-xs"
+          className="pb-12 text-center text-xs"
           style={{
             fontFamily: "var(--font-mono)",
             color: "var(--gray-500)",
@@ -320,25 +323,6 @@ export default function HomePage() {
       </div>
 
       <FloatingCTA />
-
-      {/* Keyframe animations */}
-      <style jsx global>{`
-        @keyframes orbFloat {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          25% {
-            transform: translate(30px, -20px) scale(1.05);
-          }
-          50% {
-            transform: translate(-20px, 30px) scale(0.95);
-          }
-          75% {
-            transform: translate(20px, 20px) scale(1.02);
-          }
-        }
-      `}</style>
     </main>
   );
 }

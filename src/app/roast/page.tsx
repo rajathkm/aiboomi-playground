@@ -50,7 +50,7 @@ function TypewriterText({ text }: { text: string }) {
 
 function SeverityFlames({ severity }: { severity: number }) {
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1.5">
       {Array.from({ length: 5 }).map((_, i) => (
         <motion.span
           key={i}
@@ -61,7 +61,7 @@ function SeverityFlames({ severity }: { severity: number }) {
               : { opacity: 0.2, scale: 0.8, y: 0 }
           }
           transition={{ delay: i * 0.15, duration: 0.4, type: "spring" }}
-          className="text-3xl"
+          className="text-2xl sm:text-3xl"
         >
           {"\uD83D\uDD25"}
         </motion.span>
@@ -138,25 +138,25 @@ export default function RoastPage() {
   const canSubmit = pitch.trim().length > 0 && !isOverLimit && !isLoading;
 
   return (
-    <div
-      className="min-h-screen flex flex-col"
+    <main
+      className="min-h-screen flex flex-col items-center"
       style={{
         background: "linear-gradient(180deg, #050510 0%, #1a0a00 100%)",
       }}
     >
-      <div className="flex-1 flex flex-col items-center justify-center px-4 py-12 sm:py-20 max-w-2xl mx-auto w-full">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 pt-16 pb-12 sm:pt-20 sm:pb-20 w-full max-w-2xl">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10"
+          className="text-center mb-12"
         >
           <h1
-            className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3"
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            <span className="text-3xl sm:text-4xl mr-2">{"\uD83D\uDD25"}</span>
+            <span className="text-2xl sm:text-3xl md:text-4xl mr-2">{"\uD83D\uDD25"}</span>
             <span
               className="bg-clip-text text-transparent"
               style={{
@@ -192,7 +192,7 @@ export default function RoastPage() {
                   onChange={(e) => setPitch(e.target.value)}
                   placeholder="Describe your startup in one line..."
                   rows={4}
-                  className="w-full rounded-xl px-5 py-4 text-lg resize-none outline-none transition-all duration-300 placeholder:text-white/30"
+                  className="w-full text-base sm:text-lg resize-none outline-none transition-all duration-300 placeholder:text-white/30 rounded-2xl p-6 sm:p-7"
                   style={{
                     background: "rgba(255,255,255,0.05)",
                     border: "2px solid rgba(249, 115, 22, 0.2)",
@@ -209,8 +209,10 @@ export default function RoastPage() {
                     e.currentTarget.style.boxShadow = "0 0 20px rgba(249, 115, 22, 0.05)";
                   }}
                 />
+              </div>
+              <div className="flex justify-end mt-2">
                 <span
-                  className="absolute bottom-3 right-4 text-xs font-mono transition-colors duration-200"
+                  className="text-xs transition-colors duration-200"
                   style={{
                     color: isOverLimit
                       ? "#ef4444"
@@ -240,7 +242,7 @@ export default function RoastPage() {
                 disabled={!canSubmit}
                 whileHover={canSubmit ? { scale: 1.03 } : {}}
                 whileTap={canSubmit ? { scale: 0.97 } : {}}
-                className="mt-5 w-full py-4 rounded-xl text-lg font-bold transition-all duration-300 cursor-pointer disabled:cursor-not-allowed"
+                className="mt-6 w-full min-h-[56px] py-4 rounded-2xl text-base sm:text-lg font-bold transition-all duration-300 cursor-pointer disabled:cursor-not-allowed"
                 style={{
                   background: canSubmit
                     ? "linear-gradient(135deg, #f97316, #ef4444)"
@@ -263,7 +265,7 @@ export default function RoastPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="w-full flex flex-col items-center gap-6 py-12"
+              className="w-full flex flex-col items-center gap-6 py-16"
             >
               <motion.div
                 animate={{ rotate: [0, 10, -10, 0] }}
@@ -279,7 +281,7 @@ export default function RoastPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="text-lg text-center"
+                  className="text-base sm:text-lg text-center"
                   style={{
                     color: "rgba(255,255,255,0.6)",
                     fontFamily: "var(--font-mono)",
@@ -298,18 +300,18 @@ export default function RoastPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="w-full flex flex-col items-center gap-8"
+              className="w-full flex flex-col items-center gap-6"
             >
               {/* Roast Text */}
               <div
-                className="w-full rounded-xl p-6 sm:p-8"
+                className="w-full rounded-2xl p-6 sm:p-8"
                 style={{
-                  background: "rgba(255,255,255,0.04)",
+                  background: "rgba(255,255,255,0.05)",
                   border: "1px solid rgba(249, 115, 22, 0.2)",
                 }}
               >
                 <p
-                  className="text-lg sm:text-xl leading-relaxed text-white/90"
+                  className="text-base sm:text-lg md:text-xl leading-relaxed text-white/90"
                   style={{ fontFamily: "var(--font-mono)" }}
                 >
                   <TypewriterText text={result.roast} />
@@ -317,7 +319,7 @@ export default function RoastPage() {
               </div>
 
               {/* Severity Meter */}
-              <div className="flex flex-col items-center gap-2">
+              <div className="flex flex-col items-center gap-2 py-2">
                 <span
                   className="text-xs uppercase tracking-widest"
                   style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-mono)" }}
@@ -327,13 +329,13 @@ export default function RoastPage() {
                 <SeverityFlames severity={result.severity} />
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex gap-4 w-full">
+              {/* Action Buttons - stack on mobile */}
+              <div className="flex flex-col sm:flex-row gap-3 w-full">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={handleRoastAgain}
-                  className="flex-1 py-3 rounded-xl font-semibold cursor-pointer transition-all duration-200"
+                  className="flex-1 min-h-[52px] px-6 sm:px-8 py-3.5 rounded-xl font-semibold cursor-pointer transition-all duration-200 text-sm sm:text-base"
                   style={{
                     background: "linear-gradient(135deg, #f97316, #ef4444)",
                     color: "#fff",
@@ -347,7 +349,7 @@ export default function RoastPage() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={handleReset}
-                  className="flex-1 py-3 rounded-xl font-semibold cursor-pointer transition-all duration-200"
+                  className="flex-1 min-h-[52px] px-6 sm:px-8 py-3.5 rounded-xl font-semibold cursor-pointer transition-all duration-200 text-sm sm:text-base"
                   style={{
                     background: "rgba(255,255,255,0.08)",
                     color: "rgba(255,255,255,0.7)",
@@ -360,15 +362,15 @@ export default function RoastPage() {
               </div>
 
               {/* Share Card */}
-              <div className="mt-4">
+              <div className="mt-6 w-full">
                 <ShareCard gameName="roast">
                   <p
-                    className="text-lg italic text-white/90"
+                    className="text-base sm:text-lg italic text-white/90"
                     style={{ fontFamily: "var(--font-mono)" }}
                   >
                     &ldquo;{result.roast}&rdquo;
                   </p>
-                  <p className="text-sm text-orange-400 mt-2">
+                  <p className="text-sm text-orange-400 mt-3">
                     Severity: {"\uD83D\uDD25".repeat(result.severity)}
                   </p>
                 </ShareCard>
@@ -379,10 +381,10 @@ export default function RoastPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 0.6 }}
-                className="text-center mt-4 px-4"
+                className="text-center mt-6 mb-4 px-4"
               >
                 <p
-                  className="text-sm mb-2"
+                  className="text-sm mb-3"
                   style={{ color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-body)" }}
                 >
                   Want 200 founders this honest?
@@ -391,7 +393,7 @@ export default function RoastPage() {
                   href="https://annual.aiboomi.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 hover:scale-105"
+                  className="inline-block text-sm font-semibold px-6 py-3 min-h-[44px] rounded-xl transition-all duration-200 hover:scale-105 active:scale-[0.97]"
                   style={{
                     background: "linear-gradient(135deg, #e8a530, #f0b84a)",
                     color: "#0a0a2e",
@@ -406,12 +408,12 @@ export default function RoastPage() {
         </AnimatePresence>
 
         {/* Navigation */}
-        <div className="mt-auto pt-12">
+        <div className="mt-auto pt-10 pb-6">
           <GameNav />
         </div>
       </div>
 
       <FloatingCTA />
-    </div>
+    </main>
   );
 }

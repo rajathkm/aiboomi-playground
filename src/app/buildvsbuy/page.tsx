@@ -243,7 +243,7 @@ export default function BuildVsBuyPage() {
 
   // ─── Fetch scenarios ────────────────────────────────────────────
 
-  const fetchScenarios = useCallback(async () => {
+  const fetchScenarios = useCallback(async (): Promise<Scenario[] | null> => {
     setIsLoading(true);
     setError(null);
     try {
@@ -251,8 +251,10 @@ export default function BuildVsBuyPage() {
       if (!res.ok) throw new Error("Failed to load scenarios");
       const data = await res.json();
       setScenarios(data.scenarios);
+      return data.scenarios;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
+      return null;
     } finally {
       setIsLoading(false);
     }
@@ -299,7 +301,8 @@ export default function BuildVsBuyPage() {
   // ─── Game flow ──────────────────────────────────────────────────
 
   const startGame = async () => {
-    await fetchScenarios();
+    const loaded = await fetchScenarios();
+    if (!loaded || loaded.length === 0) return;
     setChoices([]);
     setGameResults(null);
     setCurrentRound(0);
@@ -391,14 +394,14 @@ export default function BuildVsBuyPage() {
   // ─── Render ─────────────────────────────────────────────────────
 
   return (
-    <div
-      className="min-h-screen flex flex-col"
+    <main
+      className="min-h-screen flex flex-col items-center"
       style={{
         background:
           "linear-gradient(180deg, #050510 0%, #0d0525 40%, #1a0a3e 100%)",
       }}
     >
-      <div className="flex-1 flex flex-col items-center justify-center px-4 py-8 sm:py-16 max-w-2xl mx-auto w-full">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 sm:py-16 w-full max-w-2xl">
         <AnimatePresence mode="wait">
           {/* ─── INTRO SCREEN ─────────────────────────────────── */}
           {phase === "intro" && (
@@ -443,17 +446,19 @@ export default function BuildVsBuyPage() {
               </motion.p>
 
               <motion.div
-                className="w-full max-w-md rounded-xl p-6 mb-8"
+                className="w-full max-w-lg mb-10"
                 style={{
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(139,92,246,0.2)",
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(139,92,246,0.35)",
+                  borderRadius: 20,
+                  padding: "clamp(28px, 5vw, 40px) clamp(24px, 5vw, 44px)",
                 }}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
                 <h3
-                  className="text-sm font-semibold uppercase tracking-wider mb-3"
+                  className="text-sm font-semibold uppercase tracking-wider mb-4"
                   style={{
                     color: "rgba(139,92,246,0.8)",
                     fontFamily: "var(--font-mono)",
@@ -462,10 +467,11 @@ export default function BuildVsBuyPage() {
                   How It Works
                 </h3>
                 <ul
-                  className="text-sm text-left space-y-2"
+                  className="text-sm text-left space-y-3.5"
                   style={{
-                    color: "rgba(255,255,255,0.55)",
+                    color: "rgba(255,255,255,0.6)",
                     fontFamily: "var(--font-body)",
+                    lineHeight: "1.7",
                   }}
                 >
                   <li>
@@ -496,7 +502,7 @@ export default function BuildVsBuyPage() {
                 disabled={isLoading}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-4 rounded-xl text-lg font-bold cursor-pointer disabled:cursor-not-allowed transition-all duration-300"
+                className="min-h-[60px] px-10 sm:px-14 py-5 rounded-2xl text-lg font-bold cursor-pointer disabled:cursor-not-allowed transition-all duration-300"
                 style={{
                   background: isLoading
                     ? "rgba(255,255,255,0.08)"
@@ -546,14 +552,14 @@ export default function BuildVsBuyPage() {
               <motion.div
                 className="w-full rounded-2xl p-6 sm:p-8"
                 style={{
-                  background: "rgba(255,255,255,0.04)",
+                  background: "rgba(255,255,255,0.05)",
                   border: "1px solid rgba(139,92,246,0.25)",
                   boxShadow: "0 0 30px rgba(139,92,246,0.08)",
                   backdropFilter: "blur(10px)",
                 }}
               >
                 <h2
-                  className="text-xl sm:text-2xl font-bold text-white mb-2"
+                  className="text-xl sm:text-2xl font-bold text-white mb-3"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {currentScenario.title}
@@ -580,7 +586,7 @@ export default function BuildVsBuyPage() {
               </motion.div>
 
               {/* Build / Buy Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 w-full">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
                 <motion.button
                   onClick={() => handleChoice("build")}
                   whileHover={{
@@ -588,9 +594,8 @@ export default function BuildVsBuyPage() {
                     boxShadow: "0 0 40px rgba(139,92,246,0.4)",
                   }}
                   whileTap={{ scale: 0.97 }}
-                  className="flex-1 py-6 sm:py-5 rounded-xl text-xl sm:text-lg font-bold cursor-pointer transition-all duration-200"
+                  className="flex-1 min-h-[56px] sm:min-h-[64px] py-4 sm:py-5 rounded-2xl text-lg sm:text-xl font-bold cursor-pointer transition-all duration-200"
                   style={{
-                    minHeight: 80,
                     background:
                       "linear-gradient(135deg, #6d28d9, #7c3aed, #8b5cf6)",
                     color: "#fff",
@@ -607,9 +612,8 @@ export default function BuildVsBuyPage() {
                     boxShadow: "0 0 40px rgba(34,197,94,0.4)",
                   }}
                   whileTap={{ scale: 0.97 }}
-                  className="flex-1 py-6 sm:py-5 rounded-xl text-xl sm:text-lg font-bold cursor-pointer transition-all duration-200"
+                  className="flex-1 min-h-[56px] sm:min-h-[64px] py-4 sm:py-5 rounded-2xl text-lg sm:text-xl font-bold cursor-pointer transition-all duration-200"
                   style={{
-                    minHeight: 80,
                     background:
                       "linear-gradient(135deg, #15803d, #16a34a, #22c55e)",
                     color: "#fff",
@@ -646,7 +650,7 @@ export default function BuildVsBuyPage() {
 
               {/* Your choice */}
               <motion.div
-                className="w-full rounded-xl p-5"
+                className="w-full rounded-2xl p-6 sm:p-8"
                 style={{
                   background:
                     lastChoice?.choice === "timeout"
@@ -687,8 +691,8 @@ export default function BuildVsBuyPage() {
                   {lastChoice?.choice === "timeout"
                     ? "Time's Up! No Decision"
                     : lastChoice?.choice === "build"
-                    ? "BUILD &#128296;"
-                    : "BUY &#128722;"}
+                    ? "BUILD \uD83D\uDD28"
+                    : "BUY \uD83D\uDED2"}
                 </p>
                 {lastChoice?.choice !== "timeout" && (
                   <p
@@ -713,7 +717,7 @@ export default function BuildVsBuyPage() {
                 >
                   {/* Community split */}
                   <div
-                    className="rounded-xl p-4"
+                    className="rounded-2xl p-5 sm:p-6"
                     style={{
                       background: "rgba(255,255,255,0.03)",
                       border: "1px solid rgba(255,255,255,0.08)",
@@ -735,9 +739,9 @@ export default function BuildVsBuyPage() {
                   </div>
 
                   {/* Outcomes */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div
-                      className="rounded-xl p-4"
+                      className="rounded-2xl p-5 sm:p-6"
                       style={{
                         background:
                           currentRoundResult.expert_answer === "build"
@@ -761,7 +765,7 @@ export default function BuildVsBuyPage() {
                         )}
                       </div>
                       <p
-                        className="text-xs leading-relaxed"
+                        className="text-xs sm:text-sm leading-relaxed"
                         style={{
                           color: "rgba(255,255,255,0.6)",
                           fontFamily: "var(--font-body)",
@@ -772,7 +776,7 @@ export default function BuildVsBuyPage() {
                     </div>
 
                     <div
-                      className="rounded-xl p-4"
+                      className="rounded-2xl p-5 sm:p-6"
                       style={{
                         background:
                           currentRoundResult.expert_answer === "buy"
@@ -796,7 +800,7 @@ export default function BuildVsBuyPage() {
                         )}
                       </div>
                       <p
-                        className="text-xs leading-relaxed"
+                        className="text-xs sm:text-sm leading-relaxed"
                         style={{
                           color: "rgba(255,255,255,0.6)",
                           fontFamily: "var(--font-body)",
@@ -837,7 +841,7 @@ export default function BuildVsBuyPage() {
                 onClick={nextRound}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="w-full py-4 rounded-xl text-base font-bold cursor-pointer transition-all duration-200 mt-2"
+                className="w-full min-h-[56px] px-10 py-4 rounded-2xl text-base font-bold cursor-pointer transition-all duration-200 mt-2"
                 style={{
                   background:
                     "linear-gradient(135deg, #7c3aed, #8b5cf6)",
@@ -850,8 +854,8 @@ export default function BuildVsBuyPage() {
                 transition={{ delay: 0.6 }}
               >
                 {currentRound >= TOTAL_ROUNDS - 1
-                  ? "See Results &#10132;"
-                  : `Next Round &#10132;`}
+                  ? "See Results \u2794"
+                  : "Next Round \u2794"}
               </motion.button>
             </motion.div>
           )}
@@ -904,9 +908,9 @@ export default function BuildVsBuyPage() {
 
               {/* Archetype */}
               <motion.div
-                className="w-full rounded-2xl p-6 text-center"
+                className="w-full text-center rounded-2xl p-8 sm:p-10 md:p-12"
                 style={{
-                  background: "rgba(255,255,255,0.04)",
+                  background: "rgba(255,255,255,0.05)",
                   border: "1px solid rgba(139,92,246,0.25)",
                   boxShadow: "0 0 40px rgba(139,92,246,0.1)",
                 }}
@@ -956,7 +960,7 @@ export default function BuildVsBuyPage() {
                   return (
                     <motion.div
                       key={result.scenario_id}
-                      className="flex items-center gap-3 rounded-lg p-3"
+                      className="flex items-center gap-3 rounded-xl p-3.5 sm:p-4"
                       style={{
                         background: "rgba(255,255,255,0.03)",
                         border: "1px solid rgba(255,255,255,0.06)",
@@ -1011,8 +1015,8 @@ export default function BuildVsBuyPage() {
                         {choice?.choice === "timeout"
                           ? ""
                           : isCorrect
-                          ? "&#10003;"
-                          : "&#10007;"}
+                          ? "\u2713"
+                          : "\u2717"}
                       </span>
                       <span
                         className="text-xs font-bold w-12 text-right shrink-0"
@@ -1089,7 +1093,7 @@ export default function BuildVsBuyPage() {
                 onClick={playAgain}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="w-full max-w-sm py-3 rounded-xl font-semibold cursor-pointer transition-all duration-200"
+                className="w-full max-w-sm min-h-[56px] px-10 py-3.5 rounded-2xl font-semibold cursor-pointer transition-all duration-200"
                 style={{
                   background: "rgba(255,255,255,0.08)",
                   color: "rgba(255,255,255,0.7)",
@@ -1136,6 +1140,6 @@ export default function BuildVsBuyPage() {
       </div>
 
       <FloatingCTA />
-    </div>
+    </main>
   );
 }

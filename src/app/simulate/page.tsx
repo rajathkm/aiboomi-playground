@@ -169,6 +169,8 @@ export default function SimulatePage() {
     }
   };
 
+  const [restartKey, setRestartKey] = useState(0);
+
   const handleRestart = () => {
     const idx = Math.floor(Math.random() * UNCONFERENCE_PROMPTS.length);
     setSelectedPrompt(UNCONFERENCE_PROMPTS[idx]);
@@ -179,16 +181,24 @@ export default function SimulatePage() {
     setIsLoading(false);
     setActiveSpeaker(null);
     setHasStarted(false);
-    // Trigger fresh start
-    setTimeout(() => {
+    // Bump key to trigger the restart effect after state has settled
+    setRestartKey((k) => k + 1);
+  };
+
+  // Effect that fires after restart state has settled
+  useEffect(() => {
+    if (restartKey === 0) return; // skip initial mount
+    const timer = setTimeout(() => {
       setHasStarted(true);
       fetchResponses(null);
     }, 400);
-  };
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [restartKey]);
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden"
+      className="relative min-h-screen overflow-hidden flex flex-col items-center"
       style={{
         background:
           "linear-gradient(180deg, #050510 0%, #0a0a2e 50%, #1a1055 100%)",
@@ -220,16 +230,16 @@ export default function SimulatePage() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-3xl flex-col px-4 py-6 sm:px-6 lg:px-8">
+      <div className="relative z-10 flex min-h-screen w-full max-w-3xl flex-col gap-5 px-6 py-8 sm:gap-6 sm:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-4 text-center"
+          className="text-center"
         >
           <h1
-            className="mb-1 text-2xl font-bold tracking-tight sm:text-3xl"
+            className="mb-2 text-2xl font-bold tracking-tight sm:text-3xl"
             style={{
               fontFamily: "var(--font-display)",
               background:
@@ -242,7 +252,7 @@ export default function SimulatePage() {
             <span className="mr-2">💬</span>Unconference Table
           </h1>
           <p
-            className="text-sm"
+            className="text-sm sm:text-base"
             style={{
               fontFamily: "var(--font-body)",
               color: "var(--gray-400)",
@@ -257,15 +267,16 @@ export default function SimulatePage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="mb-4 rounded-xl border border-white/[0.08] p-4"
+          className="rounded-2xl p-6 sm:p-7"
           style={{
             background:
               "linear-gradient(135deg, rgba(107, 79, 160, 0.12), rgba(45, 27, 105, 0.08))",
             backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255,255,255,0.08)",
           }}
         >
           <p
-            className="mb-1 text-xs font-semibold uppercase tracking-widest"
+            className="mb-2 text-xs font-semibold uppercase tracking-widest"
             style={{
               fontFamily: "var(--font-mono)",
               color: "var(--violet)",
@@ -284,7 +295,7 @@ export default function SimulatePage() {
           </p>
           {selectedPrompt.subQuestion && (
             <p
-              className="mt-1 text-xs"
+              className="mt-2 text-xs sm:text-sm"
               style={{
                 fontFamily: "var(--font-body)",
                 color: "var(--gray-500)",
@@ -300,14 +311,15 @@ export default function SimulatePage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.25 }}
-          className="mb-4 flex gap-2 overflow-x-auto pb-1 sm:gap-3"
+          className="flex gap-3 overflow-x-auto pb-1 -mx-1 px-1"
           style={{ scrollbarWidth: "none" }}
         >
           {AI_PERSONAS.map((persona) => (
             <div
               key={persona.name}
-              className="flex flex-shrink-0 items-center gap-2 rounded-lg border border-white/[0.06] px-3 py-2 transition-all duration-300"
+              className="flex flex-shrink-0 items-center gap-2.5 rounded-xl border border-white/[0.06] transition-all duration-300 min-h-[48px]"
               style={{
+                padding: "10px 14px",
                 background:
                   activeSpeaker === persona.name
                     ? `${persona.color}15`
@@ -343,7 +355,7 @@ export default function SimulatePage() {
                   {persona.name}
                 </p>
                 <p
-                  className="truncate text-[10px] leading-tight"
+                  className="truncate text-[11px] leading-tight"
                   style={{
                     fontFamily: "var(--font-mono)",
                     color: "var(--gray-500)",
@@ -360,12 +372,13 @@ export default function SimulatePage() {
         {/* Chat area */}
         <div
           ref={chatContainerRef}
-          className="mb-3 flex-1 overflow-y-auto rounded-xl border border-white/[0.06] p-4"
+          className="chat-scroll flex-1 overflow-y-auto rounded-2xl p-5 sm:p-6"
           style={{
+            border: "1px solid rgba(255,255,255,0.06)",
             background: "rgba(5, 5, 16, 0.6)",
             backdropFilter: "blur(10px)",
-            maxHeight: "calc(100vh - 380px)",
-            minHeight: "300px",
+            maxHeight: "50vh",
+            minHeight: "280px",
             scrollbarWidth: "thin",
             scrollbarColor: "rgba(107, 79, 160, 0.3) transparent",
           }}
@@ -380,7 +393,7 @@ export default function SimulatePage() {
                   duration: 0.35,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className={`mb-3 flex items-start gap-3 ${
+                className={`mb-4 flex items-start gap-3 last:mb-0 ${
                   msg.isUser ? "flex-row-reverse" : ""
                 }`}
               >
@@ -400,7 +413,7 @@ export default function SimulatePage() {
 
                 {/* Message bubble */}
                 <div
-                  className={`max-w-[85%] rounded-xl px-4 py-2.5 ${
+                  className={`max-w-[85%] rounded-xl px-4 py-3 ${
                     msg.isUser ? "ml-auto" : ""
                   }`}
                   style={{
@@ -417,7 +430,7 @@ export default function SimulatePage() {
                 >
                   {!msg.isUser && (
                     <p
-                      className="mb-0.5 text-xs font-semibold"
+                      className="mb-1 text-xs font-semibold"
                       style={{
                         fontFamily: "var(--font-display)",
                         color: msg.color,
@@ -463,7 +476,7 @@ export default function SimulatePage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -5 }}
-                className="mb-3 flex items-center gap-3"
+                className="mb-4 flex items-center gap-3"
               >
                 <div
                   className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold"
@@ -477,18 +490,17 @@ export default function SimulatePage() {
                   {getPersonaInitial(activeSpeaker)}
                 </div>
                 <div
-                  className="flex items-center gap-1 rounded-xl px-4 py-3"
+                  className="flex items-center gap-1.5 rounded-xl px-4 py-3"
                   style={{
                     background: "rgba(255, 255, 255, 0.04)",
                     borderLeft: `3px solid ${getPersonaColor(activeSpeaker)}60`,
                   }}
                 >
                   <span
-                    className="text-xs font-semibold"
+                    className="text-xs font-semibold mr-2"
                     style={{
                       fontFamily: "var(--font-display)",
                       color: getPersonaColor(activeSpeaker),
-                      marginRight: "8px",
                     }}
                   >
                     {activeSpeaker}
@@ -529,10 +541,10 @@ export default function SimulatePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.4 }}
-          className="flex items-center gap-2"
+          className="flex items-center gap-3"
         >
           <div
-            className="flex flex-1 items-center rounded-xl border border-white/[0.1] px-4 py-3 transition-all duration-200 focus-within:border-white/[0.2]"
+            className="flex min-h-[52px] flex-1 items-center rounded-xl border border-white/[0.1] transition-all duration-200 focus-within:border-white/[0.25] px-5 py-3"
             style={{
               background: "rgba(255, 255, 255, 0.04)",
               backdropFilter: "blur(10px)",
@@ -561,7 +573,7 @@ export default function SimulatePage() {
           <button
             onClick={handleSend}
             disabled={isLoading || showReveal || !userInput.trim()}
-            className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-white/[0.1] transition-all duration-200 hover:border-white/[0.2] hover:scale-105 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="flex min-h-[52px] min-w-[52px] h-[52px] w-[52px] flex-shrink-0 items-center justify-center rounded-xl border border-white/[0.1] transition-all duration-200 hover:border-white/[0.2] hover:scale-105 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
             style={{
               background: "rgba(107, 79, 160, 0.2)",
               cursor:
@@ -587,10 +599,10 @@ export default function SimulatePage() {
         </motion.div>
 
         {/* Restart + Nav */}
-        <div className="mt-3 flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 pb-6">
           <button
             onClick={handleRestart}
-            className="text-xs transition-colors duration-200 hover:text-white/80"
+            className="min-h-[48px] px-5 py-3 text-xs rounded-xl transition-all duration-200 hover:text-white/80 hover:bg-white/5"
             style={{
               fontFamily: "var(--font-mono)",
               color: "var(--gray-500)",
@@ -628,8 +640,9 @@ export default function SimulatePage() {
                 delay: 0.3,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="max-w-lg rounded-2xl border border-white/[0.1] p-8 text-center sm:p-10"
+              className="max-w-lg w-full rounded-2xl border border-white/[0.1] text-center p-8 sm:p-10"
               style={{
+                borderRadius: 24,
                 background:
                   "linear-gradient(135deg, rgba(107, 79, 160, 0.15), rgba(45, 27, 105, 0.1))",
                 boxShadow:
@@ -641,9 +654,9 @@ export default function SimulatePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
               >
-                <p className="mb-2 text-4xl">🎭</p>
+                <p className="mb-3 text-4xl">🎭</p>
                 <h2
-                  className="mb-4 text-2xl font-bold tracking-tight sm:text-3xl"
+                  className="mb-5 text-2xl font-bold tracking-tight sm:text-3xl"
                   style={{
                     fontFamily: "var(--font-display)",
                     background:
@@ -661,7 +674,7 @@ export default function SimulatePage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.1 }}
-                className="mb-2 text-lg font-semibold"
+                className="mb-3 text-lg font-semibold"
                 style={{
                   fontFamily: "var(--font-body)",
                   color: "var(--orange)",
@@ -692,13 +705,13 @@ export default function SimulatePage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.9 }}
-                className="flex flex-col items-center gap-3"
+                className="flex flex-col items-center gap-4"
               >
                 <a
                   href={EVENT.registerUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-bold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(232,165,48,0.4)]"
+                  className="inline-flex items-center gap-2 rounded-full px-8 py-4 min-h-[48px] text-sm font-bold transition-all duration-300 hover:scale-105 active:scale-[0.97] hover:shadow-[0_0_30px_rgba(232,165,48,0.4)]"
                   style={{
                     background:
                       "linear-gradient(135deg, #e8a530, #f0b84a)",
@@ -726,7 +739,7 @@ export default function SimulatePage() {
 
                 <button
                   onClick={handleRestart}
-                  className="text-xs transition-colors duration-200 hover:text-white/80"
+                  className="text-xs min-h-[44px] px-4 py-2 rounded-lg transition-all duration-200 hover:text-white/80 hover:bg-white/5"
                   style={{
                     fontFamily: "var(--font-mono)",
                     color: "var(--gray-500)",
@@ -744,48 +757,6 @@ export default function SimulatePage() {
       </AnimatePresence>
 
       <FloatingCTA />
-
-      {/* Keyframe animations */}
-      <style jsx global>{`
-        @keyframes orbFloat {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          25% {
-            transform: translate(30px, -20px) scale(1.05);
-          }
-          50% {
-            transform: translate(-20px, 30px) scale(0.95);
-          }
-          75% {
-            transform: translate(20px, 20px) scale(1.02);
-          }
-        }
-
-        @keyframes typingBounce {
-          0%,
-          60%,
-          100% {
-            transform: translateY(0);
-            opacity: 0.4;
-          }
-          30% {
-            transform: translateY(-6px);
-            opacity: 1;
-          }
-        }
-
-        @keyframes speakerPulse {
-          0%,
-          100% {
-            box-shadow: 0 0 0 0 currentColor;
-          }
-          50% {
-            box-shadow: 0 0 0 6px transparent;
-          }
-        }
-      `}</style>
     </main>
   );
 }

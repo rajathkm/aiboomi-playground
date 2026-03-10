@@ -11,29 +11,21 @@ export function GameNav() {
   const nextGame = GAMES[(currentIndex + 1) % GAMES.length];
 
   return (
-    <div className="flex items-center gap-4 mt-8">
+    <nav className="flex flex-wrap items-center justify-center gap-3 py-2">
       <Link
         href="/"
-        className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-white/10"
-        style={{
-          border: "1px solid rgba(255,255,255,0.15)",
-          color: "rgba(255,255,255,0.7)",
-          fontFamily: "var(--font-mono)",
-        }}
+        className="px-5 py-3 min-h-[48px] flex items-center text-sm font-medium rounded-xl border border-white/15 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white hover:border-white/25 active:scale-[0.97]"
+        style={{ fontFamily: "var(--font-mono)" }}
       >
-        ← Hub
+        &larr; Hub
       </Link>
       <Link
         href={nextGame.href}
-        className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-white/10"
-        style={{
-          border: "1px solid rgba(255,255,255,0.15)",
-          color: "rgba(255,255,255,0.7)",
-          fontFamily: "var(--font-mono)",
-        }}
+        className="px-5 py-3 min-h-[48px] flex items-center text-sm font-medium rounded-xl border border-white/15 text-white/70 transition-all duration-200 hover:bg-white/10 hover:text-white hover:border-white/25 active:scale-[0.97]"
+        style={{ fontFamily: "var(--font-mono)" }}
       >
-        Next: {nextGame.title} →
+        <span className="truncate max-w-[200px] sm:max-w-none">Next: {nextGame.title}</span> &rarr;
       </Link>
-    </div>
+    </nav>
   );
 }

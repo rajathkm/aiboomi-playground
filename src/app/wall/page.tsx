@@ -191,18 +191,16 @@ export default function WallPage() {
 
   return (
     <div
+      className="min-h-screen relative"
       style={{
-        minHeight: "100vh",
         background:
           "linear-gradient(180deg, #050510 0%, #0a1a10 40%, #050510 100%)",
-        position: "relative",
       }}
     >
       {/* Brick texture overlay */}
       <div
+        className="fixed inset-0 pointer-events-none z-0"
         style={{
-          position: "fixed",
-          inset: 0,
           backgroundImage: `repeating-linear-gradient(
             0deg,
             transparent,
@@ -217,34 +215,22 @@ export default function WallPage() {
             rgba(0,204,102,0.02) 98px,
             rgba(0,204,102,0.02) 100px
           )`,
-          pointerEvents: "none",
-          zIndex: 0,
         }}
       />
 
-      <div
-        style={{
-          position: "relative",
-          zIndex: 1,
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "40px 20px 200px",
-        }}
-      >
+      <div className="relative z-[1] max-w-[1200px] mx-auto px-6 sm:px-8 pt-10 pb-[280px] sm:pb-[260px]">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          style={{ textAlign: "center", marginBottom: 16 }}
+          className="text-center mb-8"
         >
           <h1
+            className="font-extrabold text-white mb-3"
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              fontWeight: 800,
-              color: "#fff",
-              marginBottom: 12,
             }}
           >
             <span role="img" aria-label="brick">
@@ -253,13 +239,13 @@ export default function WallPage() {
             The Anti-Pitch Wall
           </h1>
           <p
+            className="mx-auto leading-relaxed"
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "clamp(0.95rem, 2vw, 1.15rem)",
               color: "rgba(255,255,255,0.6)",
               maxWidth: 560,
-              margin: "0 auto",
-              lineHeight: 1.5,
+              lineHeight: 1.6,
             }}
           >
             Every AI event tells you what&apos;s working. We built a wall for
@@ -272,9 +258,8 @@ export default function WallPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
+          className="text-center mb-6"
           style={{
-            textAlign: "center",
-            marginBottom: 32,
             fontFamily: "var(--font-mono)",
             fontSize: "0.85rem",
             color: "#00cc66",
@@ -290,11 +275,8 @@ export default function WallPage() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
+              className="text-center mb-8 mx-auto max-w-lg rounded-xl p-4"
               style={{
-                textAlign: "center",
-                marginBottom: 24,
-                padding: "12px 20px",
-                borderRadius: 12,
                 background: "rgba(0,204,102,0.1)",
                 border: "1px solid rgba(0,204,102,0.2)",
                 fontFamily: "var(--font-body)",
@@ -312,11 +294,8 @@ export default function WallPage() {
 
         {/* Masonry Wall */}
         <div
-          style={{
-            columnCount: 1,
-            columnGap: 16,
-          }}
           className="wall-masonry"
+          style={{ columnCount: 1, columnGap: 16 }}
         >
           <style>{`
             @media (min-width: 640px) {
@@ -339,12 +318,11 @@ export default function WallPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
+                  className="rounded-2xl p-6"
                   style={{
                     breakInside: "avoid",
                     marginBottom: 16,
                     background: "#18181b",
-                    borderRadius: 12,
-                    padding: "20px",
                     border: `1px solid ${getBorderColor(entry.upvotes)}`,
                     boxShadow: getGlowIntensity(entry.upvotes),
                     cursor: "default",
@@ -352,18 +330,14 @@ export default function WallPage() {
                   }}
                 >
                   {/* Category badge */}
-                  <div style={{ marginBottom: 12 }}>
+                  <div className="mb-3">
                     <span
+                      className="inline-block px-3 py-1 rounded-full font-semibold uppercase tracking-wider"
                       style={{
-                        display: "inline-block",
-                        padding: "3px 10px",
-                        borderRadius: 999,
                         fontSize: "0.7rem",
-                        fontWeight: 600,
                         fontFamily: "var(--font-mono)",
                         color: cat.color,
                         background: cat.bg,
-                        textTransform: "uppercase",
                         letterSpacing: "0.05em",
                       }}
                     >
@@ -373,12 +347,12 @@ export default function WallPage() {
 
                   {/* Entry text */}
                   <p
+                    className="mb-4"
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "0.88rem",
-                      lineHeight: 1.6,
+                      fontSize: "0.9rem",
+                      lineHeight: 1.65,
                       color: "rgba(255,255,255,0.88)",
-                      marginBottom: 16,
                       wordBreak: "break-word",
                     }}
                   >
@@ -389,12 +363,9 @@ export default function WallPage() {
                   <button
                     onClick={() => handleUpvote(entry.id)}
                     disabled={isUpvoted}
+                    aria-label={`Upvote${isUpvoted ? "d" : ""} (${entry.upvotes})`}
+                    className="inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-full transition-all duration-200"
                     style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 6,
-                      padding: "5px 12px",
-                      borderRadius: 999,
                       border: isUpvoted
                         ? "1px solid rgba(0,204,102,0.3)"
                         : "1px solid rgba(255,255,255,0.1)",
@@ -402,10 +373,9 @@ export default function WallPage() {
                         ? "rgba(0,204,102,0.1)"
                         : "transparent",
                       color: isUpvoted ? "#00cc66" : "rgba(255,255,255,0.5)",
-                      fontSize: "0.78rem",
+                      fontSize: "0.8rem",
                       fontFamily: "var(--font-mono)",
                       cursor: isUpvoted ? "default" : "pointer",
-                      transition: "all 0.2s",
                     }}
                   >
                     <svg
@@ -429,27 +399,23 @@ export default function WallPage() {
         </div>
 
         {/* Nav */}
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="flex justify-center pt-8 pb-4">
           <GameNav />
         </div>
       </div>
 
       {/* Fixed bottom submit area */}
       <div
+        className="fixed bottom-0 left-0 right-0 z-40 safe-bottom"
         style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          zIndex: 40,
-          background: "rgba(5,5,16,0.85)",
+          background: "rgba(5,5,16,0.9)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           borderTop: "1px solid rgba(255,255,255,0.08)",
-          padding: "16px 20px",
+          padding: "20px 24px",
         }}
       >
-        <div style={{ maxWidth: 700, margin: "0 auto" }}>
+        <div className="max-w-[700px] mx-auto">
           {/* Error message */}
           <AnimatePresence>
             {error && (
@@ -457,12 +423,11 @@ export default function WallPage() {
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
+                className="mb-2 text-center"
                 style={{
-                  marginBottom: 8,
                   fontSize: "0.8rem",
                   color: "#ef4444",
                   fontFamily: "var(--font-mono)",
-                  textAlign: "center",
                 }}
               >
                 {error}
@@ -471,15 +436,7 @@ export default function WallPage() {
           </AnimatePresence>
 
           {/* Category pills */}
-          <div
-            style={{
-              display: "flex",
-              gap: 8,
-              marginBottom: 10,
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
+          <div className="flex gap-2 mb-3 justify-center flex-wrap">
             {CATEGORIES.map((cat) => {
               const config = CATEGORY_CONFIG[cat];
               const isSelected = selectedCategory === cat;
@@ -487,18 +444,14 @@ export default function WallPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
+                  className="min-h-[40px] px-4 py-2 rounded-full font-semibold uppercase transition-all duration-200"
                   style={{
-                    padding: "5px 14px",
-                    borderRadius: 999,
                     fontSize: "0.75rem",
-                    fontWeight: 600,
                     fontFamily: "var(--font-mono)",
                     border: `1px solid ${isSelected ? config.color : "rgba(255,255,255,0.1)"}`,
                     background: isSelected ? config.bg : "transparent",
                     color: isSelected ? config.color : "rgba(255,255,255,0.5)",
                     cursor: "pointer",
-                    transition: "all 0.2s",
-                    textTransform: "uppercase",
                     letterSpacing: "0.03em",
                   }}
                 >
@@ -509,8 +462,8 @@ export default function WallPage() {
           </div>
 
           {/* Input row */}
-          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <div style={{ flex: 1, position: "relative" }}>
+          <div className="flex gap-3 items-center">
+            <div className="flex-1 relative">
               <input
                 type="text"
                 value={text}
@@ -525,32 +478,19 @@ export default function WallPage() {
                 }}
                 placeholder="What's your AI truth?"
                 maxLength={200}
+                className="w-full min-h-[52px] rounded-xl border border-white/10 outline-none transition-colors duration-200 focus:border-green-500/40"
                 style={{
-                  width: "100%",
-                  padding: "12px 60px 12px 16px",
-                  borderRadius: 12,
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  padding: "14px 60px 14px 20px",
                   background: "rgba(255,255,255,0.05)",
                   color: "#fff",
                   fontSize: "0.9rem",
                   fontFamily: "var(--font-mono)",
-                  outline: "none",
-                  transition: "border-color 0.2s",
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(0,204,102,0.4)";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
                 }}
               />
               {/* Character counter */}
               <span
+                className="absolute right-4 top-1/2 -translate-y-1/2"
                 style={{
-                  position: "absolute",
-                  right: 14,
-                  top: "50%",
-                  transform: "translateY(-50%)",
                   fontSize: "0.7rem",
                   fontFamily: "var(--font-mono)",
                   color:
@@ -566,9 +506,8 @@ export default function WallPage() {
             <button
               onClick={handleSubmit}
               disabled={!text.trim() || isSubmitting}
+              className="min-h-[52px] px-6 rounded-xl font-bold whitespace-nowrap transition-all duration-200"
               style={{
-                padding: "12px 20px",
-                borderRadius: 12,
                 border: "none",
                 background:
                   !text.trim() || isSubmitting
@@ -579,12 +518,9 @@ export default function WallPage() {
                     ? "rgba(255,255,255,0.4)"
                     : "#050510",
                 fontSize: "0.85rem",
-                fontWeight: 700,
                 fontFamily: "var(--font-mono)",
                 cursor:
                   !text.trim() || isSubmitting ? "not-allowed" : "pointer",
-                transition: "all 0.2s",
-                whiteSpace: "nowrap",
               }}
             >
               {isSubmitting ? "Adding..." : "Add to the Wall"}
