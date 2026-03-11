@@ -396,14 +396,13 @@ export default function BuildVsBuyPage() {
 
   return (
     <main
-      className="flex min-h-screen flex-col items-center overflow-x-hidden"
+      className="page-shell"
       style={{
-        background:
-          "linear-gradient(180deg, #050510 0%, #0d0525 40%, #1a0a3e 100%)",
+        background: "linear-gradient(180deg, #08060f 0%, #140e2a 42%, #24194c 100%)",
       }}
     >
-      <div className="safe-floating-space flex w-full max-w-lg mx-auto flex-col px-5 pt-10 pb-8 sm:max-w-3xl sm:px-6 sm:pt-14 sm:pb-12 lg:px-8">
-        <div className="mb-4 flex w-full items-center justify-start">
+      <div className="safe-floating-space page-container page-container-narrow">
+        <div className="mb-3 flex w-full items-center justify-start">
           <Link href="/" className="btn-text">
             &larr; Back to Hub
           </Link>
@@ -420,8 +419,8 @@ export default function BuildVsBuyPage() {
               className="flex w-full flex-col items-center text-center"
             >
               <motion.h1
-                className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl"
-                style={{ fontFamily: "var(--font-display)" }}
+                className="page-title mb-4"
+                style={{ fontSize: "clamp(2rem, 6.8vw, 3.8rem)" }}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -441,8 +440,7 @@ export default function BuildVsBuyPage() {
               <motion.p
                 className="mb-8 max-w-md text-balance text-lg sm:text-xl"
                 style={{
-                  color: "rgba(255,255,255,0.6)",
-                  fontFamily: "var(--font-body)",
+                  color: "var(--text-secondary)",
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -452,11 +450,10 @@ export default function BuildVsBuyPage() {
               </motion.p>
 
               <motion.div
-                className="w-full max-w-lg mb-10"
+                className="panel w-full max-w-lg mb-10"
                 style={{
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(139,92,246,0.35)",
-                  borderRadius: 20,
+                  border: "1px solid rgba(154,119,255,0.35)",
+                  borderRadius: 24,
                   padding: "clamp(28px, 5vw, 40px) clamp(24px, 5vw, 44px)",
                 }}
                 initial={{ opacity: 0, y: 10 }}
@@ -466,7 +463,7 @@ export default function BuildVsBuyPage() {
                 <h3
                   className="text-sm font-semibold uppercase tracking-wider mb-4"
                   style={{
-                    color: "rgba(139,92,246,0.8)",
+                    color: "rgba(154,119,255,0.9)",
                     fontFamily: "var(--font-mono)",
                   }}
                 >
@@ -475,8 +472,7 @@ export default function BuildVsBuyPage() {
                 <ul
                   className="list-disc space-y-3 pl-4 text-left text-sm leading-relaxed marker:text-white/35 [&>li]:pl-1"
                   style={{
-                    color: "rgba(255,255,255,0.6)",
-                    fontFamily: "var(--font-body)",
+                    color: "var(--text-secondary)",
                   }}
                 >
                   <li>You get a real AI infrastructure scenario each round</li>
@@ -509,12 +505,11 @@ export default function BuildVsBuyPage() {
                 style={{
                   background: isLoading
                     ? "rgba(255,255,255,0.08)"
-                    : "linear-gradient(135deg, #7c3aed, #8b5cf6)",
-                  color: isLoading ? "rgba(255,255,255,0.3)" : "#fff",
+                    : "linear-gradient(135deg, #8b66ff, #b48fff)",
+                  color: isLoading ? "rgba(255,255,255,0.3)" : "#1d103b",
                   boxShadow: isLoading
                     ? "none"
-                    : "0 0 40px rgba(139,92,246,0.35)",
-                  fontFamily: "var(--font-body)",
+                    : "0 0 40px rgba(154,119,255,0.4)",
                 }}
                 initial={{ opacity: 0 }}
                 animate={{

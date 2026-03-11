@@ -198,10 +198,9 @@ export default function SimulatePage() {
 
   return (
     <main
-      className="relative flex min-h-screen flex-col items-center overflow-x-hidden"
+      className="page-shell"
       style={{
-        background:
-          "linear-gradient(180deg, #050510 0%, #0a0a2e 50%, #1a1055 100%)",
+        background: "linear-gradient(180deg, #08060f 0%, #100c22 42%, #1e1640 100%)",
       }}
     >
       {/* Ambient orbs */}
@@ -230,56 +229,51 @@ export default function SimulatePage() {
         />
       </div>
 
-      <div className="safe-floating-space relative z-10 flex w-full max-w-lg mx-auto flex-col gap-5 px-5 pt-10 pb-8 sm:max-w-3xl sm:px-6 sm:py-10 lg:px-8">
-        {/* Header */}
+      <div className="safe-floating-space page-container page-container-narrow page-stack">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center"
+          className="page-header"
         >
           <h1
-            className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
-            style={{
-              fontFamily: "var(--font-display)",
-              background:
-                "linear-gradient(135deg, #ffffff 0%, #d4b8ff 60%, #6b4fa0 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
+            className="page-title"
+            style={{ fontSize: "clamp(2rem, 6.6vw, 3.7rem)" }}
           >
-            <span className="mr-2">💬</span>Unconference Table
+            <span className="mr-2">💬</span>
+            <span
+              style={{
+                background:
+                  "linear-gradient(135deg, #ffffff 0%, #e6dbff 60%, #bba0ff 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Unconference Table
+            </span>
           </h1>
-          <p
-            className="text-sm sm:text-base"
-            style={{
-              fontFamily: "var(--font-body)",
-              color: "var(--gray-400)",
-            }}
-          >
+          <p className="page-subtitle">
             Sit at a simulated roundtable with AI founder personas.
           </p>
         </motion.div>
 
-        {/* Topic card */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="rounded-2xl p-6 sm:p-7"
+          className="panel p-5 sm:p-6"
           style={{
             background:
-              "linear-gradient(135deg, rgba(107, 79, 160, 0.12), rgba(45, 27, 105, 0.08))",
-            backdropFilter: "blur(10px)",
-            border: "1px solid rgba(255,255,255,0.08)",
+              "linear-gradient(135deg, rgba(154, 119, 255, 0.16), rgba(154, 119, 255, 0.04) 60%)",
+            borderColor: "rgba(154,119,255,0.3)",
           }}
         >
           <p
             className="mb-2 text-xs font-semibold uppercase tracking-widest"
             style={{
               fontFamily: "var(--font-mono)",
-              color: "var(--violet)",
+              color: "rgba(154,119,255,0.95)",
             }}
           >
             {selectedPrompt.topic}
@@ -288,7 +282,7 @@ export default function SimulatePage() {
             className="text-base font-semibold sm:text-lg"
             style={{
               fontFamily: "var(--font-display)",
-              color: "var(--white)",
+              color: "var(--text-primary)",
             }}
           >
             &ldquo;{selectedPrompt.question}&rdquo;
@@ -298,7 +292,7 @@ export default function SimulatePage() {
               className="mt-2 text-xs sm:text-sm"
               style={{
                 fontFamily: "var(--font-body)",
-                color: "var(--gray-500)",
+                color: "var(--text-muted)",
               }}
             >
               {selectedPrompt.subQuestion}
@@ -306,7 +300,6 @@ export default function SimulatePage() {
           )}
         </motion.div>
 
-        {/* Persona cards */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -316,17 +309,16 @@ export default function SimulatePage() {
           {AI_PERSONAS.map((persona) => (
             <div
               key={persona.name}
-              className="flex min-h-[48px] items-center gap-2.5 rounded-xl border border-white/[0.06] transition-all duration-300"
+              className="panel-soft flex min-h-[50px] items-center gap-2.5 rounded-xl px-3 py-2.5 transition-all duration-300"
               style={{
-                padding: "10px 14px",
                 background:
                   activeSpeaker === persona.name
-                    ? `${persona.color}15`
-                    : "rgba(255,255,255,0.02)",
+                    ? `${persona.color}1f`
+                    : "var(--surface-mid)",
                 borderColor:
                   activeSpeaker === persona.name
                     ? `${persona.color}40`
-                    : "rgba(255,255,255,0.06)",
+                    : "rgba(255,255,255,0.09)",
               }}
             >
               <div
@@ -357,7 +349,7 @@ export default function SimulatePage() {
                   className="truncate text-[11px] leading-tight"
                   style={{
                     fontFamily: "var(--font-mono)",
-                    color: "var(--gray-500)",
+                    color: "var(--text-muted)",
                   }}
                 >
                   {persona.stage}
@@ -367,18 +359,16 @@ export default function SimulatePage() {
           ))}
         </motion.div>
 
-        {/* Chat area */}
         <div
           ref={chatContainerRef}
-          className="chat-scroll flex-1 overflow-y-auto rounded-2xl p-5 sm:p-6"
+          className="panel chat-scroll flex-1 overflow-y-auto p-5 sm:p-6"
           style={{
-            border: "1px solid rgba(255,255,255,0.06)",
-            background: "rgba(5, 5, 16, 0.6)",
-            backdropFilter: "blur(10px)",
+            borderColor: "rgba(255,255,255,0.11)",
+            background: "rgba(12, 8, 22, 0.7)",
             maxHeight: "50vh",
             minHeight: "280px",
             scrollbarWidth: "thin",
-            scrollbarColor: "rgba(107, 79, 160, 0.3) transparent",
+            scrollbarColor: "rgba(154, 119, 255, 0.3) transparent",
           }}
         >
           <AnimatePresence mode="popLayout">
@@ -416,13 +406,13 @@ export default function SimulatePage() {
                   }`}
                   style={{
                     background: msg.isUser
-                      ? "rgba(107, 79, 160, 0.2)"
-                      : "rgba(255, 255, 255, 0.04)",
+                      ? "rgba(154, 119, 255, 0.2)"
+                      : "rgba(255, 255, 255, 0.06)",
                     borderLeft: msg.isUser
                       ? "none"
                       : `3px solid ${msg.color}60`,
                     borderRight: msg.isUser
-                      ? "3px solid rgba(107, 79, 160, 0.5)"
+                      ? "3px solid rgba(154, 119, 255, 0.5)"
                       : "none",
                   }}
                 >
@@ -455,9 +445,9 @@ export default function SimulatePage() {
                   <div
                     className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold"
                     style={{
-                      backgroundColor: "rgba(107, 79, 160, 0.25)",
-                      color: "var(--lavender)",
-                      border: "2px solid rgba(107, 79, 160, 0.5)",
+                      backgroundColor: "rgba(154, 119, 255, 0.25)",
+                      color: "#e0d2ff",
+                      border: "2px solid rgba(154, 119, 255, 0.5)",
                     }}
                   >
                     Y
@@ -534,7 +524,6 @@ export default function SimulatePage() {
           <div ref={chatEndRef} />
         </div>
 
-        {/* User input */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -542,10 +531,9 @@ export default function SimulatePage() {
           className="flex items-center gap-3"
         >
           <div
-            className="flex min-h-[52px] flex-1 items-center rounded-xl border border-white/[0.1] transition-all duration-200 focus-within:border-white/[0.25] px-5 py-3"
+            className="panel-soft flex min-h-[52px] flex-1 items-center rounded-xl border-white/20 px-5 py-3 transition-all duration-200 focus-within:border-white/40"
             style={{
-              background: "rgba(255, 255, 255, 0.04)",
-              backdropFilter: "blur(10px)",
+              background: "rgba(255, 255, 255, 0.05)",
             }}
           >
             <input
@@ -561,19 +549,19 @@ export default function SimulatePage() {
                     : "Jump into the conversation..."
               }
               disabled={isLoading || showReveal}
-              className="flex-1 border-none bg-transparent text-base outline-none placeholder:text-white/20"
+              className="flex-1 border-none bg-transparent text-base outline-none placeholder:text-white/30"
               style={{
                 fontFamily: "var(--font-body)",
-                color: "var(--white)",
+                color: "var(--text-primary)",
               }}
             />
           </div>
           <button
             onClick={handleSend}
             disabled={isLoading || showReveal || !userInput.trim()}
-            className="flex min-h-[52px] min-w-[52px] h-[52px] w-[52px] flex-shrink-0 items-center justify-center rounded-xl border border-white/[0.1] transition-all duration-200 hover:border-white/[0.2] hover:scale-105 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="btn-secondary h-[52px] w-[52px] min-h-[52px] min-w-[52px] flex-shrink-0 rounded-xl border-white/15 p-0 hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-30"
             style={{
-              background: "rgba(107, 79, 160, 0.2)",
+              background: "rgba(154, 119, 255, 0.22)",
               cursor:
                 isLoading || showReveal || !userInput.trim()
                   ? "not-allowed"
@@ -596,14 +584,13 @@ export default function SimulatePage() {
           </button>
         </motion.div>
 
-        {/* Restart + Nav */}
         <div className="flex w-full flex-col items-stretch justify-between gap-3 pt-4 pb-6 sm:flex-row sm:items-center">
           <button
             onClick={handleRestart}
             className="min-h-[48px] w-full rounded-xl px-5 py-3 text-xs transition-all duration-200 hover:bg-white/5 hover:text-white/80 sm:w-auto"
             style={{
               fontFamily: "var(--font-mono)",
-              color: "var(--gray-500)",
+              color: "var(--text-muted)",
               cursor: "pointer",
               background: "none",
               border: "none",
@@ -638,13 +625,13 @@ export default function SimulatePage() {
                 delay: 0.3,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="max-w-lg w-full rounded-2xl border border-white/[0.1] text-center p-8 sm:p-10"
+              className="panel max-w-lg w-full rounded-2xl border-white/20 p-8 text-center sm:p-10"
               style={{
                 borderRadius: 24,
                 background:
-                  "linear-gradient(135deg, rgba(107, 79, 160, 0.15), rgba(45, 27, 105, 0.1))",
+                  "linear-gradient(135deg, rgba(154, 119, 255, 0.18), rgba(47, 34, 80, 0.28))",
                 boxShadow:
-                  "0 0 60px rgba(107, 79, 160, 0.2), 0 0 120px rgba(107, 79, 160, 0.1)",
+                  "0 0 60px rgba(154, 119, 255, 0.2), 0 0 120px rgba(154, 119, 255, 0.1)",
               }}
             >
               <motion.div
@@ -688,14 +675,13 @@ export default function SimulatePage() {
                 className="mb-8 text-sm leading-relaxed"
                 style={{
                   fontFamily: "var(--font-body)",
-                  color: "var(--gray-400)",
+                  color: "var(--text-secondary)",
                 }}
               >
                 {EVENT.founderCount} founders. 0 slides. Just real talk.
                 <br />
-                <span style={{ color: "var(--gray-500)" }}>
-                  {EVENT.name} &middot; {EVENT.dates} &middot;{" "}
-                  {EVENT.location}
+                <span style={{ color: "var(--text-muted)" }}>
+                  {EVENT.name} &middot; {EVENT.dates} &middot; {EVENT.location}
                 </span>
               </motion.p>
 
@@ -711,10 +697,8 @@ export default function SimulatePage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full px-8 py-4 min-h-[48px] text-sm font-bold transition-all duration-300 hover:scale-105 active:scale-[0.97] hover:shadow-[0_0_30px_rgba(232,165,48,0.4)]"
                   style={{
-                    background:
-                      "linear-gradient(135deg, #e8a530, #f0b84a)",
-                    color: "#0a0a2e",
-                    fontFamily: "var(--font-body)",
+                    background: "linear-gradient(135deg, #f2b544, #ffd07a)",
+                    color: "#201306",
                     boxShadow: "0 4px 20px rgba(232, 165, 48, 0.3)",
                   }}
                 >
@@ -740,7 +724,7 @@ export default function SimulatePage() {
                   className="text-xs min-h-[44px] px-4 py-2 rounded-lg transition-all duration-200 hover:text-white/80 hover:bg-white/5"
                   style={{
                     fontFamily: "var(--font-mono)",
-                    color: "var(--gray-500)",
+                    color: "var(--text-muted)",
                     cursor: "pointer",
                     background: "none",
                     border: "none",

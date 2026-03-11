@@ -139,42 +139,35 @@ export default function RoastPage() {
 
   return (
     <main
-      className="flex min-h-screen flex-col items-center overflow-x-hidden"
-      style={{
-        background: "linear-gradient(180deg, #050510 0%, #1a0a00 100%)",
-      }}
+      className="page-shell"
+      style={{ background: "linear-gradient(180deg, #08060f 0%, #1a1018 46%, #2d150f 100%)" }}
     >
-      <div className="safe-floating-space flex w-full max-w-lg mx-auto flex-col px-5 pt-10 pb-6 sm:max-w-3xl sm:px-6 lg:px-8">
-        {/* Header */}
+      <div className="safe-floating-space page-container page-container-narrow page-stack">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="page-header mb-4"
         >
           <h1
-            className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="page-title"
+            style={{ fontSize: "clamp(2rem, 7vw, 3.8rem)" }}
           >
-            <span className="mr-2 text-2xl sm:text-3xl lg:text-4xl">{"\uD83D\uDD25"}</span>
+            <span className="mr-2 text-2xl sm:text-3xl">{"\uD83D\uDD25"}</span>
             <span
               className="bg-clip-text text-transparent"
               style={{
-                backgroundImage: "linear-gradient(135deg, #f97316, #ef4444, #f59e0b)",
+                backgroundImage: "linear-gradient(128deg, #ff7b42, #ff8f51, #ffd07a)",
               }}
             >
               AI Founder Roast Bot
             </span>
           </h1>
-          <p
-            className="text-base sm:text-lg"
-            style={{ color: "rgba(255,255,255,0.6)", fontFamily: "var(--font-body)" }}
-          >
+          <p className="page-subtitle">
             Type your startup pitch. Get brutally honest feedback.
           </p>
         </motion.div>
 
-        {/* Input Area */}
         <AnimatePresence mode="wait">
           {!result && !isLoading && (
             <motion.form
@@ -184,43 +177,24 @@ export default function RoastPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
               onSubmit={handleSubmit}
-              className="w-full"
+              className="panel w-full p-5 sm:p-7"
             >
-              <div className="relative">
+              <div className="field-shell">
                 <textarea
                   value={pitch}
                   onChange={(e) => setPitch(e.target.value)}
                   placeholder="Describe your startup in one line..."
                   rows={4}
-                  className="w-full min-h-[120px] text-base sm:text-lg resize-none outline-none transition-all duration-300 placeholder:text-white/30 rounded-2xl p-6 sm:p-7"
+                  className="field-textarea"
                   style={{
-                    background: "rgba(255,255,255,0.05)",
-                    border: "2px solid rgba(249, 115, 22, 0.2)",
-                    color: "#fff",
-                    fontFamily: "var(--font-body)",
-                    boxShadow: "0 0 20px rgba(249, 115, 22, 0.05)",
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.6)";
-                    e.currentTarget.style.boxShadow = "0 0 30px rgba(249, 115, 22, 0.15)";
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(249, 115, 22, 0.2)";
-                    e.currentTarget.style.boxShadow = "0 0 20px rgba(249, 115, 22, 0.05)";
+                    borderColor: "rgba(255, 123, 66, 0.36)",
+                    boxShadow: "0 0 0 1px rgba(255,123,66,0.08)",
                   }}
                 />
               </div>
-              <div className="flex justify-end mt-2">
+              <div className="mt-2">
                 <span
-                  className="text-xs transition-colors duration-200"
-                  style={{
-                    color: isOverLimit
-                      ? "#ef4444"
-                      : isNearLimit
-                      ? "#f97316"
-                      : "rgba(255,255,255,0.3)",
-                    fontFamily: "var(--font-mono)",
-                  }}
+                  className={`field-counter ${isOverLimit ? "error" : isNearLimit ? "warning" : ""}`}
                 >
                   {charCount}/{MAX_CHARS}
                 </span>
@@ -237,23 +211,22 @@ export default function RoastPage() {
                 </motion.p>
               )}
 
-              <motion.button
-                type="submit"
-                disabled={!canSubmit}
-                whileHover={canSubmit ? { scale: 1.03 } : {}}
-                whileTap={canSubmit ? { scale: 0.97 } : {}}
-                className="mt-6 min-h-[52px] w-full rounded-xl py-4 text-sm font-bold transition-all duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
-                style={{
-                  background: canSubmit
-                    ? "linear-gradient(to right, #f97316, #f59e0b)"
-                    : "rgba(255,255,255,0.08)",
-                  color: canSubmit ? "#000" : "rgba(255,255,255,0.3)",
-                  boxShadow: canSubmit ? "0 0 40px rgba(249, 115, 22, 0.3)" : "none",
-                  fontFamily: "var(--font-body)",
-                }}
-              >
-                Roast Me {"\uD83D\uDD25"}
-              </motion.button>
+                <motion.button
+                  type="submit"
+                  disabled={!canSubmit}
+                  whileHover={canSubmit ? { scale: 1.03 } : {}}
+                  whileTap={canSubmit ? { scale: 0.97 } : {}}
+                  className="btn-primary mt-5 min-h-[52px] w-full rounded-full py-4 text-sm font-bold disabled:cursor-not-allowed"
+                  style={{
+                    background: canSubmit
+                      ? "linear-gradient(135deg, #ff7b42, #f2b544)"
+                      : "rgba(255,255,255,0.08)",
+                    color: canSubmit ? "#201306" : "rgba(255,255,255,0.4)",
+                    boxShadow: canSubmit ? "0 14px 30px rgba(255,123,66,0.33)" : "none",
+                  }}
+                >
+                  Roast Me {"\uD83D\uDD25"}
+                </motion.button>
             </motion.form>
           )}
 
@@ -300,14 +273,13 @@ export default function RoastPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="w-full flex flex-col items-center gap-6"
+              className="flex w-full flex-col items-center gap-5"
             >
-              {/* Roast Text */}
               <div
-                className="w-full rounded-2xl p-6 sm:p-8"
+                className="panel w-full p-6 sm:p-8"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(249, 115, 22, 0.2)",
+                  borderColor: "rgba(255,123,66,0.28)",
+                  background: "linear-gradient(135deg, rgba(255,123,66,0.11), rgba(255,123,66,0.03) 58%)",
                 }}
               >
                 <p
@@ -322,25 +294,23 @@ export default function RoastPage() {
               <div className="flex flex-col items-center gap-2 py-2">
                 <span
                   className="text-xs uppercase tracking-widest"
-                  style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-mono)" }}
+                  style={{ color: "var(--text-muted)", fontFamily: "var(--font-mono)" }}
                 >
                   Severity
                 </span>
                 <SeverityFlames severity={result.severity} />
               </div>
 
-              {/* Action Buttons - stack on mobile */}
               <div className="flex flex-col sm:flex-row gap-3 w-full">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={handleRoastAgain}
-                  className="flex-1 min-h-[52px] px-6 sm:px-8 py-3.5 rounded-xl font-semibold cursor-pointer transition-all duration-200 text-sm sm:text-base"
+                  className="btn-primary flex-1 min-h-[52px] rounded-full px-6 py-3.5 text-sm font-semibold sm:text-base"
                   style={{
-                    background: "linear-gradient(135deg, #f97316, #ef4444)",
-                    color: "#fff",
-                    fontFamily: "var(--font-body)",
-                    boxShadow: "0 0 30px rgba(249, 115, 22, 0.2)",
+                    background: "linear-gradient(135deg, #ff7b42, #d9534f)",
+                    color: "#fff7ee",
+                    boxShadow: "0 14px 30px rgba(255,123,66,0.3)",
                   }}
                 >
                   Roast Me Again {"\uD83D\uDD25"}
@@ -349,19 +319,12 @@ export default function RoastPage() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={handleReset}
-                  className="flex-1 min-h-[52px] px-6 sm:px-8 py-3.5 rounded-xl font-semibold cursor-pointer transition-all duration-200 text-sm sm:text-base"
-                  style={{
-                    background: "rgba(255,255,255,0.08)",
-                    color: "rgba(255,255,255,0.7)",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    fontFamily: "var(--font-body)",
-                  }}
+                  className="btn-secondary flex-1 min-h-[52px] rounded-full px-6 py-3.5 text-sm font-semibold sm:text-base"
                 >
                   Try Another Pitch
                 </motion.button>
               </div>
 
-              {/* Share Card */}
               <div className="mt-6 w-full">
                 <ShareCard gameName="roast">
                   <p
@@ -376,16 +339,15 @@ export default function RoastPage() {
                 </ShareCard>
               </div>
 
-              {/* CTA */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 0.6 }}
-                className="text-center mt-6 mb-4 px-4"
+                className="panel-soft mt-4 w-full px-4 py-5 text-center sm:px-6"
               >
                 <p
-                  className="text-sm mb-3"
-                  style={{ color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-body)" }}
+                  className="mb-3 text-sm"
+                  style={{ color: "var(--text-secondary)" }}
                 >
                   Want 200 founders this honest?
                 </p>
@@ -393,11 +355,10 @@ export default function RoastPage() {
                   href="https://annual.aiboomi.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block text-sm font-semibold px-6 py-3 min-h-[44px] rounded-xl transition-all duration-200 hover:scale-105 active:scale-[0.97]"
+                  className="btn-primary inline-flex min-h-[44px] px-6 py-3 text-sm font-semibold"
                   style={{
-                    background: "linear-gradient(135deg, #e8a530, #f0b84a)",
-                    color: "#0a0a2e",
-                    fontFamily: "var(--font-body)",
+                    background: "linear-gradient(135deg, #f2b544, #ffd07a)",
+                    color: "#201306",
                   }}
                 >
                   AIBoomi Annual, March 18-20, Chennai
@@ -407,8 +368,7 @@ export default function RoastPage() {
           )}
         </AnimatePresence>
 
-        {/* Navigation */}
-        <div className="mt-auto pt-10 pb-6">
+        <div className="mt-2 pb-6 pt-8">
           <GameNav />
         </div>
       </div>

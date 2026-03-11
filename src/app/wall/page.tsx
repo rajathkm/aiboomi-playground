@@ -191,10 +191,9 @@ export default function WallPage() {
 
   return (
     <div
-      className="min-h-screen relative"
+      className="page-shell"
       style={{
-        background:
-          "linear-gradient(180deg, #050510 0%, #0a1a10 40%, #050510 100%)",
+        background: "linear-gradient(180deg, #08060f 0%, #0b1b16 42%, #090612 100%)",
       }}
     >
       {/* Brick texture overlay */}
@@ -218,78 +217,64 @@ export default function WallPage() {
         }}
       />
 
-      <div className="relative z-[1] mx-auto w-full max-w-lg px-5 pt-10 pb-[320px] sm:max-w-3xl sm:px-6 sm:pb-[300px] lg:px-8">
-        {/* Header */}
+      <div className="safe-floating-space page-container page-container-narrow relative z-[1] !pb-[18rem] sm:!pb-[17rem]">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          className="page-header mb-6"
         >
           <h1
-            className="mb-3 text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl"
-            style={{
-              fontFamily: "var(--font-display)",
-            }}
+            className="page-title"
+            style={{ fontSize: "clamp(2rem, 6.6vw, 3.7rem)" }}
           >
             <span role="img" aria-label="brick">
               🧱
             </span>{" "}
             The Anti-Pitch Wall
           </h1>
-          <p
-            className="mx-auto max-w-[560px] text-base leading-relaxed sm:text-lg"
-            style={{
-              fontFamily: "var(--font-body)",
-              color: "rgba(255,255,255,0.6)",
-              lineHeight: 1.6,
-            }}
-          >
+          <p className="page-subtitle">
             Every AI event tells you what&apos;s working. We built a wall for
             what&apos;s NOT.
           </p>
         </motion.div>
 
-        {/* Live counter */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-center mb-6"
+          className="mb-6 text-center"
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: "0.85rem",
-            color: "#00cc66",
+            color: "var(--accent-mint)",
           }}
         >
           🧱 {totalCount} confessions on the wall
         </motion.div>
 
-        {/* CTA after submitting */}
         <AnimatePresence>
           {hasSubmitted && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="text-center mb-8 mx-auto max-w-lg rounded-xl p-4"
+              className="panel-soft mx-auto mb-7 max-w-lg p-4 text-center"
               style={{
-                background: "rgba(0,204,102,0.1)",
-                border: "1px solid rgba(0,204,102,0.2)",
-                fontFamily: "var(--font-body)",
+                background: "rgba(45,208,143,0.12)",
+                borderColor: "rgba(45,208,143,0.28)",
                 fontSize: "0.9rem",
-                color: "rgba(255,255,255,0.8)",
+                color: "var(--text-secondary)",
               }}
             >
               Raw. Real. That&apos;s the AIBoomi way.{" "}
-              <span style={{ color: "#00cc66", fontWeight: 600 }}>
+              <span style={{ color: "var(--accent-mint)", fontWeight: 600 }}>
                 March 18-20, Chennai.
               </span>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Wall posts */}
         <div className="grid grid-cols-1 gap-4">
           <AnimatePresence mode="popLayout">
             {entries.map((entry) => {
@@ -304,9 +289,9 @@ export default function WallPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
-                  className="rounded-2xl p-6"
+                  className="panel-soft rounded-2xl p-6"
                   style={{
-                    background: "#18181b",
+                    background: "rgba(18, 14, 30, 0.7)",
                     border: `1px solid ${getBorderColor(entry.upvotes)}`,
                     boxShadow: getGlowIntensity(entry.upvotes),
                     cursor: "default",
@@ -348,26 +333,26 @@ export default function WallPage() {
                     onClick={() => handleUpvote(entry.id)}
                     disabled={isUpvoted}
                     aria-label={`Upvote${isUpvoted ? "d" : ""} (${entry.upvotes})`}
-                    className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-full px-4 py-2 transition-all duration-200"
-                    style={{
-                      border: isUpvoted
-                        ? "1px solid rgba(0,204,102,0.3)"
-                        : "1px solid rgba(255,255,255,0.1)",
-                      background: isUpvoted
-                        ? "rgba(0,204,102,0.1)"
-                        : "transparent",
-                      color: isUpvoted ? "#00cc66" : "rgba(255,255,255,0.5)",
-                      fontSize: "0.8rem",
-                      fontFamily: "var(--font-mono)",
-                      cursor: isUpvoted ? "default" : "pointer",
+                      className="btn-secondary inline-flex min-h-[44px] min-w-[44px] justify-center gap-2 rounded-full px-4 py-2"
+                      style={{
+                        border: isUpvoted
+                          ? "1px solid rgba(45,208,143,0.4)"
+                          : "1px solid rgba(255,255,255,0.1)",
+                        background: isUpvoted
+                          ? "rgba(45,208,143,0.14)"
+                          : "transparent",
+                        color: isUpvoted ? "var(--accent-mint)" : "rgba(255,255,255,0.6)",
+                        fontSize: "0.8rem",
+                        fontFamily: "var(--font-mono)",
+                        cursor: isUpvoted ? "default" : "pointer",
                     }}
                   >
                     <svg
                       width="14"
                       height="14"
                       viewBox="0 0 24 24"
-                      fill={isUpvoted ? "#00cc66" : "none"}
-                      stroke={isUpvoted ? "#00cc66" : "currentColor"}
+                      fill={isUpvoted ? "var(--accent-mint)" : "none"}
+                      stroke={isUpvoted ? "var(--accent-mint)" : "currentColor"}
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -382,24 +367,21 @@ export default function WallPage() {
           </AnimatePresence>
         </div>
 
-        {/* Nav */}
-        <div className="flex justify-center pt-8 pb-4">
+        <div className="flex justify-center pb-4 pt-8">
           <GameNav />
         </div>
       </div>
 
-      {/* Fixed bottom submit area */}
       <div
         className="safe-bottom fixed bottom-0 left-0 right-0 z-40 px-4 py-4 sm:px-6 lg:px-8"
         style={{
-          background: "rgba(5,5,16,0.9)",
+          background: "rgba(9, 8, 16, 0.9)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          borderTop: "1px solid rgba(255,255,255,0.08)",
+          borderTop: "1px solid rgba(255,255,255,0.12)",
         }}
       >
-        <div className="max-w-[700px] mx-auto">
-          {/* Error message */}
+        <div className="panel mx-auto max-w-[700px] rounded-2xl px-4 py-4 sm:px-5 sm:py-5">
           <AnimatePresence>
             {error && (
               <motion.div
@@ -418,8 +400,7 @@ export default function WallPage() {
             )}
           </AnimatePresence>
 
-          {/* Category pills */}
-          <div className="flex gap-2 mb-3 justify-center flex-wrap">
+          <div className="mb-3 flex flex-wrap justify-center gap-2">
             {CATEGORIES.map((cat) => {
               const config = CATEGORY_CONFIG[cat];
               const isSelected = selectedCategory === cat;
@@ -427,7 +408,7 @@ export default function WallPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className="min-h-[40px] px-4 py-2 rounded-full font-semibold uppercase transition-all duration-200"
+                  className="min-h-[40px] rounded-full px-4 py-2 font-semibold uppercase transition-all duration-200"
                   style={{
                     fontSize: "0.75rem",
                     fontFamily: "var(--font-mono)",
@@ -444,9 +425,8 @@ export default function WallPage() {
             })}
           </div>
 
-          {/* Input row */}
           <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-            <div className="flex-1 relative">
+            <div className="relative flex-1">
               <input
                 type="text"
                 value={text}
@@ -461,16 +441,12 @@ export default function WallPage() {
                 }}
                 placeholder="What's your AI truth?"
                 maxLength={200}
-                className="w-full min-h-[52px] rounded-xl border border-white/10 outline-none transition-colors duration-200 focus:border-green-500/40"
+                className="field-control w-full rounded-xl border-white/20 pr-16"
                 style={{
-                  padding: "14px 60px 14px 20px",
-                  background: "rgba(255,255,255,0.05)",
-                  color: "#fff",
-                  fontSize: "1rem",
                   fontFamily: "var(--font-mono)",
+                  color: "var(--text-primary)",
                 }}
               />
-              {/* Character counter */}
               <span
                 className="absolute right-4 top-1/2 -translate-y-1/2"
                 style={{
@@ -489,18 +465,16 @@ export default function WallPage() {
             <button
               onClick={handleSubmit}
               disabled={!text.trim() || isSubmitting}
-              className="min-h-[52px] w-full rounded-xl px-6 font-bold whitespace-nowrap transition-all duration-200 sm:w-auto"
+              className="btn-primary min-h-[52px] w-full rounded-xl px-6 text-sm font-bold whitespace-nowrap sm:w-auto"
               style={{
-                border: "none",
                 background:
                   !text.trim() || isSubmitting
-                    ? "rgba(0,204,102,0.2)"
-                    : "#00cc66",
+                    ? "rgba(45,208,143,0.2)"
+                    : "linear-gradient(135deg, #2dd08f, #58e2a8)",
                 color:
                   !text.trim() || isSubmitting
                     ? "rgba(255,255,255,0.4)"
-                    : "#050510",
-                fontSize: "0.85rem",
+                    : "#05160f",
                 fontFamily: "var(--font-mono)",
                 cursor:
                   !text.trim() || isSubmitting ? "not-allowed" : "pointer",

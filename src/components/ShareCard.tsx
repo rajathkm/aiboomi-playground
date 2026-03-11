@@ -30,20 +30,16 @@ export function ShareCard({ gameName, children, className = "" }: ShareCardProps
   }, [gameName]);
 
   return (
-    <div className="flex flex-col items-center gap-5 w-full max-w-md mx-auto">
+    <div className="mx-auto flex w-full max-w-md flex-col items-center gap-4 sm:gap-5">
       <div
         ref={cardRef}
-        className={`relative overflow-hidden rounded-2xl p-6 sm:p-8 w-full ${className}`}
-        style={{
-          background: "linear-gradient(135deg, #0a0a2e 0%, #2d1b69 50%, #6b4fa0 100%)",
-          maxWidth: 500,
-        }}
+        className={`panel relative w-full max-w-[500px] overflow-hidden rounded-[22px] p-6 sm:p-8 ${className}`}
+        style={{ background: "linear-gradient(135deg, #120e21 0%, #231842 46%, #3e2d65 100%)" }}
       >
-        {/* AIBoomi branding */}
-        <div className="flex items-center gap-2 mb-6">
+        <div className="mb-6 flex items-center gap-2">
           <span
-            className="text-sm font-bold px-2.5 py-1 rounded"
-            style={{ background: "#e8a530", color: "#0a0a2e", fontFamily: "var(--font-body)" }}
+            className="rounded px-2.5 py-1 text-sm font-bold"
+            style={{ background: "var(--accent-saffron)", color: "#1b1203", fontFamily: "var(--font-body)" }}
           >
             AI
           </span>
@@ -52,15 +48,12 @@ export function ShareCard({ gameName, children, className = "" }: ShareCardProps
           </span>
         </div>
 
-        {/* Game content */}
         {children}
 
-        {/* Footer */}
         <div
-          className="mt-6 pt-4 flex items-center justify-between text-xs"
+          className="mt-6 flex items-center justify-between border-t border-white/20 pt-4 text-xs"
           style={{
-            borderTop: "1px solid rgba(255,255,255,0.15)",
-            color: "rgba(255,255,255,0.5)",
+            color: "rgba(255,255,255,0.6)",
             fontFamily: "var(--font-mono)",
           }}
         >
@@ -71,13 +64,8 @@ export function ShareCard({ gameName, children, className = "" }: ShareCardProps
 
       <button
         onClick={handleDownload}
-        className="flex items-center justify-center gap-2 px-7 py-3.5 min-h-[48px] text-sm font-semibold rounded-xl transition-all duration-200 hover:scale-105 hover:bg-white/15 active:scale-[0.97] cursor-pointer"
-        style={{
-          background: "rgba(255,255,255,0.1)",
-          color: "rgba(255,255,255,0.8)",
-          border: "1px solid rgba(255,255,255,0.15)",
-          fontFamily: "var(--font-mono)",
-        }}
+        className="btn-secondary min-h-[48px] rounded-full px-6 py-3 text-sm font-semibold"
+        style={{ fontFamily: "var(--font-mono)" }}
       >
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M8 2v8m0 0L5 7m3 3l3-3M3 12h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
