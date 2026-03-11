@@ -230,7 +230,7 @@ export default function SimulatePage() {
         />
       </div>
 
-      <div className="safe-floating-space relative z-10 flex min-h-screen w-full max-w-3xl flex-col gap-5 px-4 py-8 sm:gap-6 sm:px-6 sm:py-10 lg:px-8">
+      <div className="safe-floating-space relative z-10 flex w-full max-w-lg mx-auto flex-col gap-5 px-5 pt-10 pb-8 sm:max-w-3xl sm:px-6 sm:py-10 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

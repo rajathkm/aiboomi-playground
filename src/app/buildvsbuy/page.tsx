@@ -402,7 +402,7 @@ export default function BuildVsBuyPage() {
           "linear-gradient(180deg, #050510 0%, #0d0525 40%, #1a0a3e 100%)",
       }}
     >
-      <div className="safe-floating-space flex w-full max-w-3xl flex-1 flex-col px-4 pt-12 pb-8 sm:px-6 sm:pt-14 sm:pb-12 lg:px-8">
+      <div className="safe-floating-space flex w-full max-w-lg mx-auto flex-col px-5 pt-10 pb-8 sm:max-w-3xl sm:px-6 sm:pt-14 sm:pb-12 lg:px-8">
         <div className="mb-4 flex w-full items-center justify-start">
           <Link href="/" className="btn-text">
             &larr; Back to Hub

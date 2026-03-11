@@ -218,7 +218,7 @@ export default function WallPage() {
         }}
       />
 
-      <div className="relative z-[1] mx-auto w-full max-w-3xl px-4 pt-10 pb-[320px] sm:px-6 sm:pb-[300px] lg:px-8">
+      <div className="relative z-[1] mx-auto w-full max-w-lg px-5 pt-10 pb-[320px] sm:max-w-3xl sm:px-6 sm:pb-[300px] lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

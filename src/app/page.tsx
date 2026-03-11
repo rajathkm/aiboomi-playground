@@ -97,7 +97,7 @@ export default function HomePage() {
         }}
       />
 
-      <div className="safe-floating-space relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <div className="safe-floating-space relative z-10 mx-auto flex min-h-screen max-w-lg flex-col items-center px-5 pt-14 pb-32 sm:max-w-5xl sm:px-6 lg:px-8">
         {/* Code comment — terminal aesthetic */}
         <motion.p
           initial={{ opacity: 0, y: -10 }}
@@ -170,7 +170,7 @@ export default function HomePage() {
         </motion.div>
 
         {/* Game cards grid */}
-        <div className="mb-14 grid w-full max-w-4xl grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
+        <div className="mb-14 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
           {GAMES.map((game, i) => (
             <motion.div
               key={game.id}
@@ -271,10 +271,9 @@ export default function HomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.35 }}
           onClick={handleRandomize}
-          className="btn-secondary group relative mb-10 w-full min-h-[52px] overflow-hidden rounded-2xl px-8 py-4 tracking-wide transition-all duration-300 sm:w-auto"
+          className="btn-secondary group relative mb-10 w-full min-h-[52px] overflow-hidden rounded-xl px-8 py-4 tracking-wide transition-all duration-300 border border-white/15 bg-white/5 flex items-center justify-center gap-2 font-medium text-sm mt-2"
           style={{
             fontFamily: "var(--font-body)",
-            background: "rgba(255, 255, 255, 0.08)",
             backdropFilter: "blur(10px)",
             color: "rgba(255,255,255,0.92)",
           }}

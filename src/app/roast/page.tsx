@@ -144,7 +144,7 @@ export default function RoastPage() {
         background: "linear-gradient(180deg, #050510 0%, #1a0a00 100%)",
       }}
     >
-      <div className="safe-floating-space flex flex-1 w-full max-w-3xl flex-col items-center justify-center px-4 pt-16 sm:px-6 sm:pt-20 lg:px-8">
+      <div className="safe-floating-space flex w-full max-w-lg mx-auto flex-col px-5 pt-10 pb-6 sm:max-w-3xl sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -192,7 +192,7 @@ export default function RoastPage() {
                   onChange={(e) => setPitch(e.target.value)}
                   placeholder="Describe your startup in one line..."
                   rows={4}
-                  className="w-full text-base sm:text-lg resize-none outline-none transition-all duration-300 placeholder:text-white/30 rounded-2xl p-6 sm:p-7"
+                  className="w-full min-h-[120px] text-base sm:text-lg resize-none outline-none transition-all duration-300 placeholder:text-white/30 rounded-2xl p-6 sm:p-7"
                   style={{
                     background: "rgba(255,255,255,0.05)",
                     border: "2px solid rgba(249, 115, 22, 0.2)",
@@ -242,12 +242,12 @@ export default function RoastPage() {
                 disabled={!canSubmit}
                 whileHover={canSubmit ? { scale: 1.03 } : {}}
                 whileTap={canSubmit ? { scale: 0.97 } : {}}
-                className="mt-6 min-h-[56px] w-full rounded-2xl py-4 text-base font-bold transition-all duration-300 cursor-pointer disabled:cursor-not-allowed sm:w-auto sm:px-10 sm:text-lg"
+                className="mt-6 min-h-[52px] w-full rounded-xl py-4 text-sm font-bold transition-all duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
                 style={{
                   background: canSubmit
-                    ? "linear-gradient(135deg, #f97316, #ef4444)"
+                    ? "linear-gradient(to right, #f97316, #f59e0b)"
                     : "rgba(255,255,255,0.08)",
-                  color: canSubmit ? "#fff" : "rgba(255,255,255,0.3)",
+                  color: canSubmit ? "#000" : "rgba(255,255,255,0.3)",
                   boxShadow: canSubmit ? "0 0 40px rgba(249, 115, 22, 0.3)" : "none",
                   fontFamily: "var(--font-body)",
                 }}
