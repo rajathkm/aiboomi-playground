@@ -123,11 +123,11 @@ main {
   margin: 0 auto;
   width: min(100%, 1120px);
   padding: clamp(2.45rem, 4.2vw, 3.4rem) clamp(1.55rem, 4.8vw, 3.25rem)
-    calc(9.2rem + var(--safe-area-bottom));
+    calc(6.4rem + var(--safe-area-bottom));
 }
 
 .page-container.page-container-narrow {
-  width: min(100%, 880px);
+  width: min(100%, 980px);
 }
 
 .page-stack {
@@ -489,12 +489,12 @@ main {
 }
 
 .safe-floating-space {
-  padding-bottom: calc(var(--safe-area-bottom) + 10.4rem);
+  padding-bottom: calc(var(--safe-area-bottom) + 8rem);
 }
 
 @media (min-width: 640px) {
   .safe-floating-space {
-    padding-bottom: calc(var(--safe-area-bottom) + 4.8rem);
+    padding-bottom: calc(var(--safe-area-bottom) + 2.8rem);
   }
 }
 

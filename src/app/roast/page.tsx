@@ -147,7 +147,7 @@ export default function RoastPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="page-header mb-6"
+          className="page-header mb-8"
         >
           <h1
             className="page-title"
@@ -177,7 +177,7 @@ export default function RoastPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
               onSubmit={handleSubmit}
-              className="panel w-full p-8 sm:p-10"
+              className="panel mx-auto flex w-full max-w-3xl flex-col p-8 sm:p-10"
             >
               <div className="field-shell">
                 <textarea
@@ -185,7 +185,7 @@ export default function RoastPage() {
                   onChange={(e) => setPitch(e.target.value)}
                   placeholder="Describe your startup in one line..."
                   rows={4}
-                  className="field-textarea min-h-[180px] rounded-2xl px-5 py-4 leading-relaxed sm:min-h-[200px]"
+                  className="field-textarea min-h-[190px] rounded-2xl px-5 py-4 leading-relaxed sm:min-h-[220px]"
                   style={{
                     borderColor: "rgba(255, 123, 66, 0.36)",
                     boxShadow: "0 0 0 1px rgba(255,123,66,0.08)",
@@ -211,22 +211,22 @@ export default function RoastPage() {
                 </motion.p>
               )}
 
-                <motion.button
-                  type="submit"
-                  disabled={!canSubmit}
-                  whileHover={canSubmit ? { scale: 1.03 } : {}}
-                  whileTap={canSubmit ? { scale: 0.97 } : {}}
-                  className="btn-primary mt-8 min-h-[54px] w-full rounded-full py-4 text-sm font-bold disabled:cursor-not-allowed"
-                  style={{
-                    background: canSubmit
-                      ? "linear-gradient(135deg, #ff7b42, #f2b544)"
-                      : "rgba(255,255,255,0.08)",
-                    color: canSubmit ? "#201306" : "rgba(255,255,255,0.4)",
-                    boxShadow: canSubmit ? "0 14px 30px rgba(255,123,66,0.33)" : "none",
-                  }}
-                >
-                  Roast Me {"\uD83D\uDD25"}
-                </motion.button>
+              <motion.button
+                type="submit"
+                disabled={!canSubmit}
+                whileHover={canSubmit ? { scale: 1.03 } : {}}
+                whileTap={canSubmit ? { scale: 0.97 } : {}}
+                className="btn-primary mt-10 min-h-[56px] w-full rounded-full py-4 text-base font-bold disabled:cursor-not-allowed"
+                style={{
+                  background: canSubmit
+                    ? "linear-gradient(135deg, #ff7b42, #f2b544)"
+                    : "rgba(255,255,255,0.08)",
+                  color: canSubmit ? "#201306" : "rgba(255,255,255,0.4)",
+                  boxShadow: canSubmit ? "0 14px 30px rgba(255,123,66,0.33)" : "none",
+                }}
+              >
+                Roast Me {"\uD83D\uDD25"}
+              </motion.button>
             </motion.form>
           )}
 
@@ -273,7 +273,7 @@ export default function RoastPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex w-full flex-col items-center gap-5"
+              className="mx-auto flex w-full max-w-3xl flex-col items-center gap-5"
             >
               <div
                 className="panel w-full p-6 sm:p-8"

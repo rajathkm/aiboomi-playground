@@ -217,7 +217,7 @@ export default function WallPage() {
         }}
       />
 
-      <div className="safe-floating-space page-container page-container-narrow page-stack relative z-[1] !pb-[20rem] sm:!pb-[14.5rem]">
+      <div className="safe-floating-space page-container page-stack relative z-[1] !pb-[17rem] sm:!pb-[13.5rem]">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -275,7 +275,7 @@ export default function WallPage() {
           )}
         </AnimatePresence>
 
-        <div className="grid grid-cols-1 gap-7">
+        <div className="grid grid-cols-1 gap-6 sm:gap-7">
           <AnimatePresence mode="popLayout">
             {entries.map((entry) => {
               const cat = CATEGORY_CONFIG[entry.category];
@@ -333,18 +333,18 @@ export default function WallPage() {
                     onClick={() => handleUpvote(entry.id)}
                     disabled={isUpvoted}
                     aria-label={`Upvote${isUpvoted ? "d" : ""} (${entry.upvotes})`}
-                      className="btn-secondary inline-flex min-h-[44px] min-w-[44px] justify-center gap-2 rounded-full px-4 py-2"
-                      style={{
-                        border: isUpvoted
-                          ? "1px solid rgba(45,208,143,0.4)"
-                          : "1px solid rgba(255,255,255,0.1)",
-                        background: isUpvoted
-                          ? "rgba(45,208,143,0.14)"
-                          : "transparent",
-                        color: isUpvoted ? "var(--accent-mint)" : "rgba(255,255,255,0.6)",
-                        fontSize: "0.8rem",
-                        fontFamily: "var(--font-mono)",
-                        cursor: isUpvoted ? "default" : "pointer",
+                    className="btn-secondary inline-flex min-h-[44px] min-w-[44px] justify-center gap-2 rounded-full px-4 py-2"
+                    style={{
+                      border: isUpvoted
+                        ? "1px solid rgba(45,208,143,0.4)"
+                        : "1px solid rgba(255,255,255,0.1)",
+                      background: isUpvoted
+                        ? "rgba(45,208,143,0.14)"
+                        : "transparent",
+                      color: isUpvoted ? "var(--accent-mint)" : "rgba(255,255,255,0.6)",
+                      fontSize: "0.8rem",
+                      fontFamily: "var(--font-mono)",
+                      cursor: isUpvoted ? "default" : "pointer",
                     }}
                   >
                     <svg
@@ -372,17 +372,14 @@ export default function WallPage() {
         </div>
       </div>
 
-      <div
-        className="fixed bottom-[calc(var(--safe-area-bottom)+0.85rem)] left-1/2 z-40 w-[calc(100%-1.1rem)] max-w-[930px] -translate-x-1/2 sm:bottom-[calc(var(--safe-area-bottom)+1.05rem)] sm:w-[min(100%-2.4rem,930px)]"
-        style={{
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-        }}
-      >
+      <div className="pointer-events-none fixed inset-x-0 bottom-[calc(var(--safe-area-bottom)+0.8rem)] z-40 flex justify-center px-3 sm:px-5">
         <div
-          className="panel mx-auto rounded-3xl border-white/15 px-5 py-5 sm:px-8 sm:py-7"
+          className="pointer-events-auto mx-auto w-full max-w-[1040px] rounded-[24px] border border-white/12 px-4 py-3 shadow-[0_20px_46px_rgba(3,2,12,0.56)] sm:px-6 sm:py-3.5"
           style={{
-            background: "rgba(9, 8, 16, 0.9)",
+            background:
+              "linear-gradient(180deg, rgba(10,9,18,0.76), rgba(8,8,16,0.92))",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
           }}
         >
           <AnimatePresence>
@@ -403,7 +400,7 @@ export default function WallPage() {
             )}
           </AnimatePresence>
 
-          <div className="mb-6 flex flex-wrap justify-center gap-2.5 sm:gap-3">
+          <div className="mb-2.5 flex flex-wrap justify-center gap-2">
             {CATEGORIES.map((cat) => {
               const config = CATEGORY_CONFIG[cat];
               const isSelected = selectedCategory === cat;
@@ -411,13 +408,13 @@ export default function WallPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className="min-h-[46px] rounded-full px-4 py-2.5 font-semibold uppercase transition-all duration-200 sm:px-5"
+                  className="min-h-[34px] rounded-full px-3 py-1.5 font-semibold uppercase transition-all duration-200 sm:min-h-[36px] sm:px-4"
                   style={{
-                    fontSize: "0.75rem",
+                    fontSize: "0.66rem",
                     fontFamily: "var(--font-mono)",
-                    border: `1px solid ${isSelected ? config.color : "rgba(255,255,255,0.1)"}`,
+                    border: `1px solid ${isSelected ? config.color : "rgba(255,255,255,0.14)"}`,
                     background: isSelected ? config.bg : "transparent",
-                    color: isSelected ? config.color : "rgba(255,255,255,0.5)",
+                    color: isSelected ? config.color : "rgba(255,255,255,0.6)",
                     cursor: "pointer",
                     letterSpacing: "0.03em",
                   }}
@@ -428,7 +425,7 @@ export default function WallPage() {
             })}
           </div>
 
-          <div className="flex flex-col items-stretch gap-4 md:flex-row md:items-center">
+          <div className="flex flex-col items-stretch gap-2.5 md:flex-row md:items-center">
             <div className="relative flex-1">
               <input
                 type="text"
@@ -444,14 +441,13 @@ export default function WallPage() {
                 }}
                 placeholder="What's your AI truth?"
                 maxLength={200}
-                className="field-control w-full rounded-2xl border-white/20 px-5 pr-20"
+                className="h-[46px] w-full rounded-xl border border-white/22 bg-white/6 px-4 pr-20 text-[0.95rem] text-[var(--text-primary)] outline-none transition-colors duration-150 placeholder:text-white/35 focus:border-white/45 sm:h-[48px] sm:px-5"
                 style={{
                   fontFamily: "var(--font-mono)",
-                  color: "var(--text-primary)",
                 }}
               />
               <span
-                className="absolute right-5 top-1/2 -translate-y-1/2"
+                className="absolute right-4 top-1/2 -translate-y-1/2"
                 style={{
                   fontSize: "0.7rem",
                   fontFamily: "var(--font-mono)",
@@ -468,15 +464,19 @@ export default function WallPage() {
             <button
               onClick={handleSubmit}
               disabled={!text.trim() || isSubmitting}
-              className="btn-primary min-h-[54px] w-full rounded-2xl px-6 text-sm font-bold whitespace-nowrap md:min-w-[220px] md:w-auto"
+              className="inline-flex min-h-[46px] w-full items-center justify-center rounded-xl border px-6 text-sm font-bold whitespace-nowrap transition-all duration-200 md:min-w-[210px] md:w-auto"
               style={{
-                background:
+                borderColor:
                   !text.trim() || isSubmitting
                     ? "rgba(45,208,143,0.2)"
+                    : "rgba(45,208,143,0.7)",
+                background:
+                  !text.trim() || isSubmitting
+                    ? "rgba(45,208,143,0.15)"
                     : "linear-gradient(135deg, #2dd08f, #58e2a8)",
                 color:
                   !text.trim() || isSubmitting
-                    ? "rgba(255,255,255,0.4)"
+                    ? "rgba(255,255,255,0.56)"
                     : "#05160f",
                 fontFamily: "var(--font-mono)",
                 cursor:

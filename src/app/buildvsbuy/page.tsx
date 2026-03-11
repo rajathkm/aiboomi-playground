@@ -416,11 +416,11 @@ export default function BuildVsBuyPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="flex w-full max-w-2xl flex-col items-center text-center"
+              className="flex w-full max-w-4xl flex-col items-center text-center lg:min-h-[78vh] lg:justify-center"
             >
               <motion.h1
-                className="page-title mb-5"
-                style={{ fontSize: "clamp(2rem, 6.8vw, 3.8rem)" }}
+                className="page-title mb-6"
+                style={{ fontSize: "clamp(2.6rem, 7.3vw, 5rem)" }}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -438,7 +438,7 @@ export default function BuildVsBuyPage() {
               </motion.h1>
 
               <motion.p
-                className="mb-12 max-w-xl text-balance text-lg leading-relaxed sm:text-[1.32rem]"
+                className="mb-14 max-w-2xl text-balance text-xl leading-relaxed sm:text-[1.5rem]"
                 style={{
                   color: "var(--text-secondary)",
                 }}
@@ -450,18 +450,18 @@ export default function BuildVsBuyPage() {
               </motion.p>
 
               <motion.div
-                className="panel mb-14 w-full max-w-xl"
+                className="panel mb-14 w-full max-w-3xl"
                 style={{
                   border: "1px solid rgba(154,119,255,0.35)",
                   borderRadius: 24,
-                  padding: "clamp(34px, 6vw, 50px) clamp(30px, 5.4vw, 52px)",
+                  padding: "clamp(40px, 7vw, 64px) clamp(34px, 6vw, 64px)",
                 }}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
                 <h3
-                  className="mb-5 text-sm font-semibold uppercase tracking-wider"
+                  className="mb-6 text-sm font-semibold uppercase tracking-wider"
                   style={{
                     color: "rgba(154,119,255,0.9)",
                     fontFamily: "var(--font-mono)",
@@ -470,7 +470,7 @@ export default function BuildVsBuyPage() {
                   How It Works
                 </h3>
                 <ul
-                  className="list-disc space-y-3.5 pl-4 text-left text-[0.98rem] leading-relaxed marker:text-white/35 [&>li]:pl-1"
+                  className="list-disc space-y-4 pl-5 text-left text-[1.06rem] leading-relaxed marker:text-white/35 [&>li]:pl-1"
                   style={{
                     color: "var(--text-secondary)",
                   }}
@@ -501,7 +501,7 @@ export default function BuildVsBuyPage() {
                 disabled={isLoading}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="btn-primary mt-4 w-full min-h-[58px] rounded-2xl px-10 py-5 text-lg sm:w-auto sm:px-14"
+                className="btn-primary mt-5 w-full min-h-[60px] rounded-2xl px-12 py-5 text-lg sm:w-auto sm:px-16 sm:text-xl"
                 style={{
                   background: isLoading
                     ? "rgba(255,255,255,0.08)"
