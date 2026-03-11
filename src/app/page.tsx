@@ -137,9 +137,9 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.86 }}
-          className="panel-soft mt-2 flex flex-col items-center gap-4 px-4 py-5 text-center sm:flex-row sm:justify-between sm:text-left"
+          className="panel-soft mt-2 flex flex-col items-center gap-4 px-6 py-5 text-center sm:flex-row sm:justify-between sm:px-8 sm:text-left"
         >
-          <p className="text-sm text-[var(--text-secondary)]">
+          <p className="w-full text-sm text-[var(--text-secondary)]">
             Want to keep it unpredictable for social shares?
           </p>
           <button

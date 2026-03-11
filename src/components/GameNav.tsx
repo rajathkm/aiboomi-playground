@@ -11,7 +11,7 @@ export function GameNav() {
   const nextGame = GAMES[(currentIndex + 1) % GAMES.length];
 
   return (
-    <nav className="nav-row py-1">
+    <nav className="nav-row py-2">
       <Link
         href="/"
         className="btn-secondary w-full px-5 py-3 text-center text-sm sm:w-auto"

@@ -177,7 +177,7 @@ export default function RoastPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
               onSubmit={handleSubmit}
-              className="panel w-full p-5 sm:p-7"
+              className="panel w-full p-6 sm:p-8"
             >
               <div className="field-shell">
                 <textarea
@@ -192,7 +192,7 @@ export default function RoastPage() {
                   }}
                 />
               </div>
-              <div className="mt-2">
+              <div className="mt-3">
                 <span
                   className={`field-counter ${isOverLimit ? "error" : isNearLimit ? "warning" : ""}`}
                 >
@@ -216,7 +216,7 @@ export default function RoastPage() {
                   disabled={!canSubmit}
                   whileHover={canSubmit ? { scale: 1.03 } : {}}
                   whileTap={canSubmit ? { scale: 0.97 } : {}}
-                  className="btn-primary mt-5 min-h-[52px] w-full rounded-full py-4 text-sm font-bold disabled:cursor-not-allowed"
+                  className="btn-primary mt-7 min-h-[52px] w-full rounded-full py-4 text-sm font-bold disabled:cursor-not-allowed"
                   style={{
                     background: canSubmit
                       ? "linear-gradient(135deg, #ff7b42, #f2b544)"
@@ -368,7 +368,7 @@ export default function RoastPage() {
           )}
         </AnimatePresence>
 
-        <div className="mt-2 pb-6 pt-8">
+        <div className="mt-3 pb-6 pt-10">
           <GameNav />
         </div>
       </div>

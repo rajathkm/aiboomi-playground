@@ -217,7 +217,7 @@ export default function WallPage() {
         }}
       />
 
-      <div className="safe-floating-space page-container page-container-narrow relative z-[1] !pb-[18rem] sm:!pb-[17rem]">
+      <div className="safe-floating-space page-container page-container-narrow page-stack relative z-[1] !pb-[18rem] sm:!pb-[17rem]">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -243,7 +243,7 @@ export default function WallPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="mb-6 text-center"
+          className="text-center"
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: "0.85rem",
@@ -259,7 +259,7 @@ export default function WallPage() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className="panel-soft mx-auto mb-7 max-w-lg p-4 text-center"
+              className="panel-soft mx-auto max-w-lg p-5 text-center sm:p-6"
               style={{
                 background: "rgba(45,208,143,0.12)",
                 borderColor: "rgba(45,208,143,0.28)",
@@ -275,7 +275,7 @@ export default function WallPage() {
           )}
         </AnimatePresence>
 
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-5">
           <AnimatePresence mode="popLayout">
             {entries.map((entry) => {
               const cat = CATEGORY_CONFIG[entry.category];
@@ -289,7 +289,7 @@ export default function WallPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
-                  className="panel-soft rounded-2xl p-6"
+                  className="panel-soft rounded-2xl p-7 sm:p-8"
                   style={{
                     background: "rgba(18, 14, 30, 0.7)",
                     border: `1px solid ${getBorderColor(entry.upvotes)}`,
@@ -299,7 +299,7 @@ export default function WallPage() {
                   }}
                 >
                   {/* Category badge */}
-                  <div className="mb-3">
+                  <div className="mb-4">
                     <span
                       className="inline-block px-3 py-1 rounded-full font-semibold uppercase tracking-wider"
                       style={{
@@ -316,11 +316,11 @@ export default function WallPage() {
 
                   {/* Entry text */}
                   <p
-                    className="mb-4"
+                    className="mb-5"
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "0.9rem",
-                      lineHeight: 1.65,
+                      fontSize: "0.95rem",
+                      lineHeight: 1.72,
                       color: "rgba(255,255,255,0.88)",
                       wordBreak: "break-word",
                     }}
@@ -367,7 +367,7 @@ export default function WallPage() {
           </AnimatePresence>
         </div>
 
-        <div className="flex justify-center pb-4 pt-8">
+        <div className="flex justify-center pb-6 pt-11">
           <GameNav />
         </div>
       </div>
@@ -381,7 +381,7 @@ export default function WallPage() {
           borderTop: "1px solid rgba(255,255,255,0.12)",
         }}
       >
-        <div className="panel mx-auto max-w-[700px] rounded-2xl px-4 py-4 sm:px-5 sm:py-5">
+        <div className="panel mx-auto max-w-[760px] rounded-2xl px-5 py-5 sm:px-7 sm:py-6">
           <AnimatePresence>
             {error && (
               <motion.div
@@ -400,7 +400,7 @@ export default function WallPage() {
             )}
           </AnimatePresence>
 
-          <div className="mb-3 flex flex-wrap justify-center gap-2">
+          <div className="mb-4 flex flex-wrap justify-center gap-2.5">
             {CATEGORIES.map((cat) => {
               const config = CATEGORY_CONFIG[cat];
               const isSelected = selectedCategory === cat;
@@ -408,7 +408,7 @@ export default function WallPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className="min-h-[40px] rounded-full px-4 py-2 font-semibold uppercase transition-all duration-200"
+                  className="min-h-[42px] rounded-full px-5 py-2.5 font-semibold uppercase transition-all duration-200"
                   style={{
                     fontSize: "0.75rem",
                     fontFamily: "var(--font-mono)",
@@ -425,8 +425,8 @@ export default function WallPage() {
             })}
           </div>
 
-          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-            <div className="relative flex-1">
+          <div className="flex flex-col items-stretch gap-3.5 sm:flex-row sm:items-center">
+            <div className="relative flex-1 sm:flex-[1.1]">
               <input
                 type="text"
                 value={text}
@@ -465,7 +465,7 @@ export default function WallPage() {
             <button
               onClick={handleSubmit}
               disabled={!text.trim() || isSubmitting}
-              className="btn-primary min-h-[52px] w-full rounded-xl px-6 text-sm font-bold whitespace-nowrap sm:w-auto"
+              className="btn-primary min-h-[52px] w-full rounded-xl px-6 text-sm font-bold whitespace-nowrap sm:min-w-[180px] sm:w-auto"
               style={{
                 background:
                   !text.trim() || isSubmitting

@@ -401,7 +401,7 @@ export default function BuildVsBuyPage() {
         background: "linear-gradient(180deg, #08060f 0%, #140e2a 42%, #24194c 100%)",
       }}
     >
-      <div className="safe-floating-space page-container page-container-narrow">
+      <div className="safe-floating-space page-container page-container-narrow page-stack">
         <div className="mb-3 flex w-full items-center justify-start">
           <Link href="/" className="btn-text">
             &larr; Back to Hub
@@ -438,7 +438,7 @@ export default function BuildVsBuyPage() {
               </motion.h1>
 
               <motion.p
-                className="mb-8 max-w-md text-balance text-lg sm:text-xl"
+                className="mb-10 max-w-md text-balance text-lg sm:text-xl"
                 style={{
                   color: "var(--text-secondary)",
                 }}
@@ -446,15 +446,15 @@ export default function BuildVsBuyPage() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                30 seconds. 7 rounds. Real AI infrastructure decisions.
+                30 seconds &middot; 7 rounds &middot; Real AI infrastructure decisions.
               </motion.p>
 
               <motion.div
-                className="panel w-full max-w-lg mb-10"
+                className="panel mb-11 w-full max-w-lg"
                 style={{
                   border: "1px solid rgba(154,119,255,0.35)",
                   borderRadius: 24,
-                  padding: "clamp(28px, 5vw, 40px) clamp(24px, 5vw, 44px)",
+                  padding: "clamp(30px, 5vw, 42px) clamp(28px, 5vw, 46px)",
                 }}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -511,6 +511,10 @@ export default function BuildVsBuyPage() {
                     ? "none"
                     : "0 0 40px rgba(154,119,255,0.4)",
                 }}
+                transition={{
+                  opacity: { delay: 0.5 },
+                  boxShadow: { repeat: Infinity, duration: 2, ease: "easeInOut" },
+                }}
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
@@ -519,10 +523,6 @@ export default function BuildVsBuyPage() {
                     "0 0 40px rgba(139,92,246,0.4)",
                     "0 0 20px rgba(139,92,246,0.2)",
                   ],
-                }}
-                transition={{
-                  opacity: { delay: 0.5 },
-                  boxShadow: { repeat: Infinity, duration: 2, ease: "easeInOut" },
                 }}
               >
                 {isLoading ? "Loading..." : "Start Game"}
@@ -538,7 +538,7 @@ export default function BuildVsBuyPage() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -40 }}
               transition={{ duration: 0.4 }}
-              className="flex flex-col items-center w-full gap-6"
+              className="flex w-full flex-col items-center gap-7"
             >
               {/* Progress */}
               <ProgressBar current={currentRound + 1} total={TOTAL_ROUNDS} />
@@ -548,12 +548,11 @@ export default function BuildVsBuyPage() {
 
               {/* Scenario Card */}
               <motion.div
-                className="w-full rounded-2xl p-6 sm:p-8"
+                className="panel w-full p-7 sm:p-9"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(139,92,246,0.25)",
-                  boxShadow: "0 0 30px rgba(139,92,246,0.08)",
-                  backdropFilter: "blur(10px)",
+                  borderColor: "rgba(139,92,246,0.3)",
+                  background:
+                    "linear-gradient(145deg, rgba(139,92,246,0.14), rgba(255,255,255,0.03) 65%)",
                 }}
               >
                 <h2
@@ -573,7 +572,7 @@ export default function BuildVsBuyPage() {
                   {currentScenario.context}
                 </p>
                 <p
-                  className="text-sm sm:text-base leading-relaxed"
+                  className="text-sm leading-relaxed sm:text-base"
                   style={{
                     color: "rgba(255,255,255,0.7)",
                     fontFamily: "var(--font-body)",
@@ -584,7 +583,7 @@ export default function BuildVsBuyPage() {
               </motion.div>
 
               {/* Build / Buy Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
+              <div className="flex w-full flex-col gap-3.5 sm:flex-row sm:gap-4">
                 <motion.button
                   onClick={() => handleChoice("build")}
                   whileHover={{
@@ -633,7 +632,7 @@ export default function BuildVsBuyPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="flex flex-col items-center w-full gap-5"
+              className="flex w-full flex-col items-center gap-6"
             >
               {/* Progress */}
               <ProgressBar current={currentRound + 1} total={TOTAL_ROUNDS} />
@@ -648,7 +647,7 @@ export default function BuildVsBuyPage() {
 
               {/* Your choice */}
               <motion.div
-                className="w-full rounded-2xl p-6 sm:p-8"
+                className="panel w-full p-7 sm:p-9"
                 style={{
                   background:
                     lastChoice?.choice === "timeout"
@@ -656,7 +655,7 @@ export default function BuildVsBuyPage() {
                       : lastChoice?.choice === "build"
                       ? "rgba(139,92,246,0.1)"
                       : "rgba(34,197,94,0.1)",
-                  border: `1px solid ${
+                  borderColor: `${
                     lastChoice?.choice === "timeout"
                       ? "rgba(239,68,68,0.3)"
                       : lastChoice?.choice === "build"
@@ -708,17 +707,17 @@ export default function BuildVsBuyPage() {
               {/* Results details */}
               {currentRoundResult && (
                 <motion.div
-                  className="w-full space-y-4"
+                  className="w-full space-y-5"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
                 >
                   {/* Community split */}
                   <div
-                    className="rounded-2xl p-5 sm:p-6"
+                    className="panel-soft rounded-2xl p-6 sm:p-7"
                     style={{
-                      background: "rgba(255,255,255,0.03)",
-                      border: "1px solid rgba(255,255,255,0.08)",
+                      background: "rgba(255,255,255,0.04)",
+                      borderColor: "rgba(255,255,255,0.12)",
                     }}
                   >
                     <p
@@ -737,15 +736,15 @@ export default function BuildVsBuyPage() {
                   </div>
 
                   {/* Outcomes */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4">
                     <div
-                      className="rounded-2xl p-5 sm:p-6"
+                      className="panel-soft rounded-2xl p-6 sm:p-7"
                       style={{
                         background:
                           currentRoundResult.expert_answer === "build"
                             ? "rgba(139,92,246,0.12)"
                             : "rgba(255,255,255,0.03)",
-                        border: `1px solid ${
+                        borderColor: `${
                           currentRoundResult.expert_answer === "build"
                             ? "rgba(139,92,246,0.3)"
                             : "rgba(255,255,255,0.08)"
@@ -774,13 +773,13 @@ export default function BuildVsBuyPage() {
                     </div>
 
                     <div
-                      className="rounded-2xl p-5 sm:p-6"
+                      className="panel-soft rounded-2xl p-6 sm:p-7"
                       style={{
                         background:
                           currentRoundResult.expert_answer === "buy"
                             ? "rgba(34,197,94,0.12)"
                             : "rgba(255,255,255,0.03)",
-                        border: `1px solid ${
+                        borderColor: `${
                           currentRoundResult.expert_answer === "buy"
                             ? "rgba(34,197,94,0.3)"
                             : "rgba(255,255,255,0.08)"
@@ -866,7 +865,7 @@ export default function BuildVsBuyPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.6 }}
-              className="flex flex-col items-center w-full gap-6"
+              className="flex w-full flex-col items-center gap-7"
             >
               {/* Score */}
               <motion.div
@@ -906,10 +905,11 @@ export default function BuildVsBuyPage() {
 
               {/* Archetype */}
               <motion.div
-                className="w-full text-center rounded-2xl p-8 sm:p-10 md:p-12"
+                className="panel w-full rounded-2xl p-8 text-center sm:p-10 md:p-12"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(139,92,246,0.25)",
+                  borderColor: "rgba(139,92,246,0.28)",
+                  background:
+                    "linear-gradient(145deg, rgba(139,92,246,0.12), rgba(255,255,255,0.03) 62%)",
                   boxShadow: "0 0 40px rgba(139,92,246,0.1)",
                 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -936,7 +936,7 @@ export default function BuildVsBuyPage() {
 
               {/* Round-by-round breakdown */}
               <motion.div
-                className="w-full space-y-2"
+                className="w-full space-y-2.5"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
@@ -958,10 +958,10 @@ export default function BuildVsBuyPage() {
                   return (
                     <motion.div
                       key={result.scenario_id}
-                      className="flex items-center gap-3 rounded-xl p-3.5 sm:p-4"
+                      className="panel-soft flex items-center gap-3.5 rounded-xl p-4 sm:p-5"
                       style={{
-                        background: "rgba(255,255,255,0.03)",
-                        border: "1px solid rgba(255,255,255,0.06)",
+                        background: "rgba(255,255,255,0.04)",
+                        borderColor: "rgba(255,255,255,0.1)",
                       }}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -1056,7 +1056,7 @@ export default function BuildVsBuyPage() {
 
               {/* CTA */}
               <motion.div
-                className="text-center mt-4 px-4"
+                className="panel-soft mt-4 w-full px-6 py-5 text-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.4 }}
