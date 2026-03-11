@@ -122,8 +122,8 @@ main {
   z-index: 10;
   margin: 0 auto;
   width: min(100%, 1120px);
-  padding: clamp(2.2rem, 3.6vw, 3rem) clamp(1.2rem, 3.6vw, 2.6rem)
-    calc(8.5rem + var(--safe-area-bottom));
+  padding: clamp(2.45rem, 4.2vw, 3.4rem) clamp(1.55rem, 4.8vw, 3.25rem)
+    calc(9.2rem + var(--safe-area-bottom));
 }
 
 .page-container.page-container-narrow {
@@ -133,7 +133,7 @@ main {
 .page-stack {
   display: flex;
   flex-direction: column;
-  gap: clamp(1.3rem, 2.8vw, 2.3rem);
+  gap: clamp(1.45rem, 3vw, 2.55rem);
 }
 
 .page-header {
@@ -243,17 +243,17 @@ main {
 }
 
 .field-control {
-  min-height: 3.2rem;
-  padding: 0.8rem 1rem;
+  min-height: 3.35rem;
+  padding: 0.88rem 1.05rem;
   font-size: 0.98rem;
 }
 
 .field-textarea {
-  min-height: 8.2rem;
-  padding: 1rem 1.1rem;
+  min-height: 8.8rem;
+  padding: 1.15rem 1.2rem;
   resize: vertical;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .field-control::placeholder,
@@ -331,10 +331,10 @@ main {
 
 .btn-secondary {
   width: 100%;
-  min-height: 3rem;
+  min-height: 3.1rem;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.78rem 1.1rem;
+  padding: 0.82rem 1.2rem;
   font-size: 0.88rem;
   font-weight: 600;
   color: rgba(245, 240, 255, 0.88);
@@ -381,7 +381,7 @@ main {
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 1.05rem;
 }
 
 @media (min-width: 640px) {
@@ -395,7 +395,7 @@ main {
 .game-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(0.9rem, 2.4vw, 1.35rem);
+  gap: clamp(1.05rem, 2.8vw, 1.55rem);
   width: 100%;
 }
 
@@ -410,7 +410,7 @@ main {
   overflow: hidden;
   border-radius: var(--radius-md);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: clamp(1rem, 2.2vw, 1.45rem);
+  padding: clamp(1.3rem, 2.8vw, 1.95rem);
   background: linear-gradient(
       170deg,
       rgba(255, 255, 255, 0.09),
@@ -489,12 +489,12 @@ main {
 }
 
 .safe-floating-space {
-  padding-bottom: calc(var(--safe-area-bottom) + 7.2rem);
+  padding-bottom: calc(var(--safe-area-bottom) + 10.4rem);
 }
 
 @media (min-width: 640px) {
   .safe-floating-space {
-    padding-bottom: calc(var(--safe-area-bottom) + 3rem);
+    padding-bottom: calc(var(--safe-area-bottom) + 4.8rem);
   }
 }
 

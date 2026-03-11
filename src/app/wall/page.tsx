@@ -217,12 +217,12 @@ export default function WallPage() {
         }}
       />
 
-      <div className="safe-floating-space page-container page-container-narrow page-stack relative z-[1] !pb-[18rem] sm:!pb-[17rem]">
+      <div className="safe-floating-space page-container page-container-narrow page-stack relative z-[1] !pb-[20rem] sm:!pb-[14.5rem]">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="page-header mb-6"
+          className="page-header mb-7"
         >
           <h1
             className="page-title"
@@ -275,7 +275,7 @@ export default function WallPage() {
           )}
         </AnimatePresence>
 
-        <div className="grid grid-cols-1 gap-5">
+        <div className="grid grid-cols-1 gap-7">
           <AnimatePresence mode="popLayout">
             {entries.map((entry) => {
               const cat = CATEGORY_CONFIG[entry.category];
@@ -289,7 +289,7 @@ export default function WallPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
-                  className="panel-soft rounded-2xl p-7 sm:p-8"
+                  className="panel-soft rounded-2xl p-8 sm:p-10"
                   style={{
                     background: "rgba(18, 14, 30, 0.7)",
                     border: `1px solid ${getBorderColor(entry.upvotes)}`,
@@ -299,7 +299,7 @@ export default function WallPage() {
                   }}
                 >
                   {/* Category badge */}
-                  <div className="mb-4">
+                  <div className="mb-[1.125rem]">
                     <span
                       className="inline-block px-3 py-1 rounded-full font-semibold uppercase tracking-wider"
                       style={{
@@ -316,11 +316,11 @@ export default function WallPage() {
 
                   {/* Entry text */}
                   <p
-                    className="mb-5"
+                    className="mb-6"
                     style={{
                       fontFamily: "var(--font-mono)",
-                      fontSize: "0.95rem",
-                      lineHeight: 1.72,
+                      fontSize: "1rem",
+                      lineHeight: 1.8,
                       color: "rgba(255,255,255,0.88)",
                       wordBreak: "break-word",
                     }}
@@ -367,21 +367,24 @@ export default function WallPage() {
           </AnimatePresence>
         </div>
 
-        <div className="flex justify-center pb-6 pt-11">
+        <div className="flex justify-center pb-10 pt-14">
           <GameNav />
         </div>
       </div>
 
       <div
-        className="safe-bottom fixed bottom-0 left-0 right-0 z-40 px-4 py-4 sm:px-6 lg:px-8"
+        className="fixed bottom-[calc(var(--safe-area-bottom)+0.85rem)] left-1/2 z-40 w-[calc(100%-1.1rem)] max-w-[930px] -translate-x-1/2 sm:bottom-[calc(var(--safe-area-bottom)+1.05rem)] sm:w-[min(100%-2.4rem,930px)]"
         style={{
-          background: "rgba(9, 8, 16, 0.9)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          borderTop: "1px solid rgba(255,255,255,0.12)",
         }}
       >
-        <div className="panel mx-auto max-w-[760px] rounded-2xl px-5 py-5 sm:px-7 sm:py-6">
+        <div
+          className="panel mx-auto rounded-3xl border-white/15 px-5 py-5 sm:px-8 sm:py-7"
+          style={{
+            background: "rgba(9, 8, 16, 0.9)",
+          }}
+        >
           <AnimatePresence>
             {error && (
               <motion.div
@@ -400,7 +403,7 @@ export default function WallPage() {
             )}
           </AnimatePresence>
 
-          <div className="mb-4 flex flex-wrap justify-center gap-2.5">
+          <div className="mb-6 flex flex-wrap justify-center gap-2.5 sm:gap-3">
             {CATEGORIES.map((cat) => {
               const config = CATEGORY_CONFIG[cat];
               const isSelected = selectedCategory === cat;
@@ -408,7 +411,7 @@ export default function WallPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className="min-h-[42px] rounded-full px-5 py-2.5 font-semibold uppercase transition-all duration-200"
+                  className="min-h-[46px] rounded-full px-4 py-2.5 font-semibold uppercase transition-all duration-200 sm:px-5"
                   style={{
                     fontSize: "0.75rem",
                     fontFamily: "var(--font-mono)",
@@ -425,8 +428,8 @@ export default function WallPage() {
             })}
           </div>
 
-          <div className="flex flex-col items-stretch gap-3.5 sm:flex-row sm:items-center">
-            <div className="relative flex-1 sm:flex-[1.1]">
+          <div className="flex flex-col items-stretch gap-4 md:flex-row md:items-center">
+            <div className="relative flex-1">
               <input
                 type="text"
                 value={text}
@@ -441,14 +444,14 @@ export default function WallPage() {
                 }}
                 placeholder="What's your AI truth?"
                 maxLength={200}
-                className="field-control w-full rounded-xl border-white/20 pr-16"
+                className="field-control w-full rounded-2xl border-white/20 px-5 pr-20"
                 style={{
                   fontFamily: "var(--font-mono)",
                   color: "var(--text-primary)",
                 }}
               />
               <span
-                className="absolute right-4 top-1/2 -translate-y-1/2"
+                className="absolute right-5 top-1/2 -translate-y-1/2"
                 style={{
                   fontSize: "0.7rem",
                   fontFamily: "var(--font-mono)",
@@ -465,7 +468,7 @@ export default function WallPage() {
             <button
               onClick={handleSubmit}
               disabled={!text.trim() || isSubmitting}
-              className="btn-primary min-h-[52px] w-full rounded-xl px-6 text-sm font-bold whitespace-nowrap sm:min-w-[180px] sm:w-auto"
+              className="btn-primary min-h-[54px] w-full rounded-2xl px-6 text-sm font-bold whitespace-nowrap md:min-w-[220px] md:w-auto"
               style={{
                 background:
                   !text.trim() || isSubmitting

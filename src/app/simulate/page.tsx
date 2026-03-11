@@ -262,7 +262,7 @@ export default function SimulatePage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="panel p-6 sm:p-8"
+          className="panel p-8 sm:p-10"
           style={{
             background:
               "linear-gradient(135deg, rgba(154, 119, 255, 0.16), rgba(154, 119, 255, 0.04) 60%)",
@@ -279,7 +279,7 @@ export default function SimulatePage() {
             {selectedPrompt.topic}
           </p>
           <p
-            className="text-base font-semibold sm:text-lg"
+            className="text-[1.03rem] font-semibold leading-relaxed sm:text-xl"
             style={{
               fontFamily: "var(--font-display)",
               color: "var(--text-primary)",
@@ -289,7 +289,7 @@ export default function SimulatePage() {
           </p>
           {selectedPrompt.subQuestion && (
             <p
-              className="mt-2 text-xs sm:text-sm"
+              className="mt-3 text-sm leading-relaxed sm:text-[0.96rem]"
               style={{
                 fontFamily: "var(--font-body)",
                 color: "var(--text-muted)",
@@ -304,12 +304,12 @@ export default function SimulatePage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.25 }}
-          className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2"
+          className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2"
         >
           {AI_PERSONAS.map((persona) => (
             <div
               key={persona.name}
-              className="panel-soft flex min-h-[66px] items-center gap-3.5 rounded-xl px-4 py-3.5 transition-all duration-300"
+              className="panel-soft flex min-h-[88px] items-center gap-4 rounded-2xl px-6 py-5 transition-all duration-300"
               style={{
                 background:
                   activeSpeaker === persona.name
@@ -322,7 +322,7 @@ export default function SimulatePage() {
               }}
             >
               <div
-                className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold"
+                className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold"
                 style={{
                   backgroundColor: `${persona.color}25`,
                   color: persona.color,
@@ -337,7 +337,7 @@ export default function SimulatePage() {
               </div>
               <div className="min-w-0">
                 <p
-                  className="text-xs font-semibold leading-tight"
+                  className="text-sm font-semibold leading-tight"
                   style={{
                     fontFamily: "var(--font-display)",
                     color: persona.color,
@@ -346,7 +346,7 @@ export default function SimulatePage() {
                   {persona.name}
                 </p>
                 <p
-                  className="truncate text-[11px] leading-tight"
+                  className="text-xs leading-snug"
                   style={{
                     fontFamily: "var(--font-mono)",
                     color: "var(--text-muted)",
@@ -361,12 +361,12 @@ export default function SimulatePage() {
 
         <div
           ref={chatContainerRef}
-          className="panel chat-scroll flex-1 overflow-y-auto p-6 sm:p-7"
+          className="panel chat-scroll flex-1 overflow-y-auto p-8 sm:p-10"
           style={{
             borderColor: "rgba(255,255,255,0.11)",
             background: "rgba(12, 8, 22, 0.7)",
-            maxHeight: "50vh",
-            minHeight: "280px",
+            maxHeight: "54vh",
+            minHeight: "320px",
             scrollbarWidth: "thin",
             scrollbarColor: "rgba(154, 119, 255, 0.3) transparent",
           }}
@@ -381,14 +381,14 @@ export default function SimulatePage() {
                   duration: 0.35,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className={`mb-4 flex items-start gap-3.5 last:mb-0 ${
+                className={`mb-6 flex items-start gap-3.5 last:mb-0 sm:gap-4 ${
                   msg.isUser ? "flex-row-reverse" : ""
                 }`}
               >
                 {/* Avatar */}
                 {!msg.isUser && (
                   <div
-                    className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold"
+                    className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold"
                     style={{
                       backgroundColor: `${msg.color}20`,
                       color: msg.color,
@@ -401,7 +401,7 @@ export default function SimulatePage() {
 
                 {/* Message bubble */}
                 <div
-                  className="max-w-[calc(100%-5rem)] rounded-xl px-5 py-3.5 sm:max-w-[78%]"
+                  className="min-w-0 max-w-[calc(100%-5.8rem)] rounded-2xl px-5 py-4 sm:max-w-[78%] sm:px-6"
                   style={{
                     background: msg.isUser
                       ? "rgba(154, 119, 255, 0.2)"
@@ -426,7 +426,7 @@ export default function SimulatePage() {
                     </p>
                   )}
                   <p
-                    className="text-sm leading-relaxed"
+                    className="break-words whitespace-pre-wrap text-[0.95rem] leading-relaxed"
                     style={{
                       fontFamily: "var(--font-body)",
                       color: msg.isUser
@@ -441,7 +441,7 @@ export default function SimulatePage() {
                 {/* User avatar */}
                 {msg.isUser && (
                   <div
-                    className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold"
+                    className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-sm font-bold"
                     style={{
                       backgroundColor: "rgba(154, 119, 255, 0.25)",
                       color: "#e0d2ff",
@@ -462,10 +462,10 @@ export default function SimulatePage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -5 }}
-                className="mb-4 flex items-center gap-3"
+                className="mb-4 flex items-center gap-3.5"
               >
                 <div
-                  className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold"
+                  className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold"
                   style={{
                     backgroundColor: `${getPersonaColor(activeSpeaker)}20`,
                     color: getPersonaColor(activeSpeaker),
@@ -476,7 +476,7 @@ export default function SimulatePage() {
                   {getPersonaInitial(activeSpeaker)}
                 </div>
                 <div
-                  className="flex items-center gap-1.5 rounded-xl px-4 py-3"
+                  className="flex items-center gap-1.5 rounded-xl px-4 py-3.5"
                   style={{
                     background: "rgba(255, 255, 255, 0.04)",
                     borderLeft: `3px solid ${getPersonaColor(activeSpeaker)}60`,
@@ -526,10 +526,10 @@ export default function SimulatePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.4 }}
-          className="flex items-center gap-3.5"
+          className="flex items-center gap-3.5 sm:gap-4"
         >
           <div
-            className="panel-soft flex min-h-[56px] flex-1 items-center rounded-xl border-white/20 px-4 py-3.5 transition-all duration-200 focus-within:border-white/40 sm:px-6"
+            className="panel-soft flex min-h-[62px] flex-1 items-center rounded-2xl border-white/20 px-5 py-4 transition-all duration-200 focus-within:border-white/40 sm:px-6"
             style={{
               background: "rgba(255, 255, 255, 0.05)",
             }}
@@ -547,7 +547,7 @@ export default function SimulatePage() {
                     : "Jump in with your take..."
               }
               disabled={isLoading || showReveal}
-              className="flex-1 border-none bg-transparent pr-1 text-[15px] outline-none placeholder:text-white/30 sm:text-base"
+              className="min-w-0 flex-1 border-none bg-transparent pr-2 text-[15px] outline-none placeholder:text-white/30 sm:text-base"
               style={{
                 fontFamily: "var(--font-body)",
                 color: "var(--text-primary)",
@@ -557,7 +557,7 @@ export default function SimulatePage() {
           <button
             onClick={handleSend}
             disabled={isLoading || showReveal || !userInput.trim()}
-            className="btn-secondary h-[52px] w-[52px] min-h-[52px] min-w-[52px] flex-shrink-0 rounded-xl border-white/15 p-0 hover:scale-105 active:scale-95 disabled:cursor-not-allowed disabled:opacity-30"
+            className="flex h-[54px] w-[54px] min-h-[54px] min-w-[54px] flex-shrink-0 items-center justify-center rounded-2xl border border-white/20 p-0 transition-all duration-200 hover:scale-105 hover:border-white/35 active:scale-95 disabled:cursor-not-allowed disabled:opacity-30 sm:h-[56px] sm:w-[56px] sm:min-h-[56px] sm:min-w-[56px]"
             style={{
               background: "rgba(154, 119, 255, 0.22)",
               cursor:
@@ -582,10 +582,10 @@ export default function SimulatePage() {
           </button>
         </motion.div>
 
-        <div className="flex w-full flex-col items-stretch justify-between gap-3 pb-6 pt-7 sm:flex-row sm:items-center">
+        <div className="flex w-full flex-col items-stretch justify-between gap-4 pb-8 pt-10 sm:flex-row sm:items-center">
           <button
             onClick={handleRestart}
-            className="min-h-[48px] w-full rounded-xl px-5 py-3 text-xs transition-all duration-200 hover:bg-white/5 hover:text-white/80 sm:w-auto"
+            className="min-h-[48px] w-full rounded-xl px-5 py-3 text-sm transition-all duration-200 hover:bg-white/5 hover:text-white/80 sm:w-auto"
             style={{
               fontFamily: "var(--font-mono)",
               color: "var(--text-muted)",

@@ -147,7 +147,7 @@ export default function RoastPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="page-header mb-4"
+          className="page-header mb-6"
         >
           <h1
             className="page-title"
@@ -177,7 +177,7 @@ export default function RoastPage() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
               onSubmit={handleSubmit}
-              className="panel w-full p-6 sm:p-8"
+              className="panel w-full p-8 sm:p-10"
             >
               <div className="field-shell">
                 <textarea
@@ -185,14 +185,14 @@ export default function RoastPage() {
                   onChange={(e) => setPitch(e.target.value)}
                   placeholder="Describe your startup in one line..."
                   rows={4}
-                  className="field-textarea"
+                  className="field-textarea min-h-[180px] rounded-2xl px-5 py-4 leading-relaxed sm:min-h-[200px]"
                   style={{
                     borderColor: "rgba(255, 123, 66, 0.36)",
                     boxShadow: "0 0 0 1px rgba(255,123,66,0.08)",
                   }}
                 />
               </div>
-              <div className="mt-3">
+              <div className="mt-4 pr-1">
                 <span
                   className={`field-counter ${isOverLimit ? "error" : isNearLimit ? "warning" : ""}`}
                 >
@@ -216,7 +216,7 @@ export default function RoastPage() {
                   disabled={!canSubmit}
                   whileHover={canSubmit ? { scale: 1.03 } : {}}
                   whileTap={canSubmit ? { scale: 0.97 } : {}}
-                  className="btn-primary mt-7 min-h-[52px] w-full rounded-full py-4 text-sm font-bold disabled:cursor-not-allowed"
+                  className="btn-primary mt-8 min-h-[54px] w-full rounded-full py-4 text-sm font-bold disabled:cursor-not-allowed"
                   style={{
                     background: canSubmit
                       ? "linear-gradient(135deg, #ff7b42, #f2b544)"
@@ -368,7 +368,7 @@ export default function RoastPage() {
           )}
         </AnimatePresence>
 
-        <div className="mt-3 pb-6 pt-10">
+        <div className="mt-4 pb-8 pt-12">
           <GameNav />
         </div>
       </div>
