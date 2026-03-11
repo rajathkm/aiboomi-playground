@@ -144,6 +144,116 @@ main {
   background: rgba(107, 79, 160, 0.5);
 }
 
+/* Shared button variants */
+.btn-primary {
+  display: inline-flex;
+  width: 100%;
+  min-height: 56px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 0.875rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--white);
+  background: var(
+    --btn-primary-bg,
+    linear-gradient(135deg, var(--orange), var(--orange-bright))
+  );
+  box-shadow: var(--btn-primary-shadow, 0 0 24px rgba(232, 165, 48, 0.25));
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    filter 200ms ease,
+    border-color 200ms ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.04);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  width: 100%;
+  min-height: 48px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.btn-text {
+  display: inline-flex;
+  min-height: 44px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 0;
+  background: transparent;
+  padding: 0.5rem 0.25rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.72);
+  transition:
+    color 200ms ease,
+    transform 200ms ease;
+}
+
+.btn-text:hover {
+  color: var(--white);
+}
+
+.btn-text:active {
+  transform: scale(0.98);
+}
+
+@media (min-width: 640px) {
+  .btn-primary,
+  .btn-secondary {
+    width: auto;
+  }
+}
+
 /* Shared keyframes */
 @keyframes orbFloat {
   0%, 100% { transform: translate(0, 0) scale(1); }

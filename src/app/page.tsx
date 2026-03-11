@@ -117,10 +117,10 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="mb-6 text-center text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
+          className="mb-6 text-center text-4xl font-bold leading-[0.95] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           style={{
             fontFamily: "var(--font-display)",
-            background: "linear-gradient(135deg, #ffffff 0%, #d4b8ff 50%, #e8a530 100%)",
+            background: "linear-gradient(135deg, #ffffff 0%, #ebe3ff 60%, #d4b8ff 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -134,40 +134,40 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45 }}
-          className="mb-5 max-w-2xl text-center text-base leading-relaxed sm:text-lg md:text-xl"
+          className="mb-5 max-w-xs text-balance text-center text-base leading-relaxed sm:max-w-2xl sm:text-lg md:text-xl"
           style={{
             fontFamily: "var(--font-body)",
             color: "var(--gray-200)",
           }}
         >
-          4 AI-powered games. 0 slides.{" "}
-          <span style={{ color: "var(--orange)" }}>
-            This is what real talk looks like.
+          <span style={{ color: "rgba(255,255,255,0.9)" }}>
+            4 AI-powered games. 0 slides. This is what real talk looks like.
           </span>
         </motion.p>
 
         {/* Event context */}
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.65 }}
-          className="mb-14 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-center text-xs tracking-[0.15em] sm:text-sm"
+          className="mb-14 flex flex-wrap items-center justify-center gap-2.5 text-center"
           style={{
-            fontFamily: "var(--font-mono)",
-            color: "var(--gray-400)",
+            fontFamily: "var(--font-body)",
           }}
         >
-          <span>{EVENT.name}</span>
-          <span style={{ color: "var(--violet)" }}>|</span>
-          <span>{EVENT.dates}</span>
-          <span style={{ color: "var(--violet)" }}>|</span>
-          <span>{EVENT.location}</span>
-          <span style={{ color: "var(--violet)" }}>|</span>
-          <span>
-            <span style={{ color: "var(--orange)" }}>{EVENT.founderCount}</span>{" "}
-            AI Founders
+          <span className="rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs text-white/80 sm:text-sm">
+            {EVENT.name}
           </span>
-        </motion.p>
+          <span className="rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs text-white/80 sm:text-sm">
+            Mar 18-20
+          </span>
+          <span className="rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs text-white/80 sm:text-sm">
+            {EVENT.location}
+          </span>
+          <span className="rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs text-white/90 sm:text-sm">
+            {EVENT.founderCount} Founders
+          </span>
+        </motion.div>
 
         {/* Game cards grid */}
         <div className="mb-14 grid w-full max-w-4xl grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
@@ -182,9 +182,12 @@ export default function HomePage() {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <Link href={game.href} className="group block">
+              <Link
+                href={game.href}
+                className="group block cursor-pointer transition-transform duration-200 active:scale-[0.98]"
+              >
                 <div
-                  className="relative overflow-hidden transition-all duration-300 ease-out group-hover:scale-[1.03] p-6 sm:p-8"
+                  className="relative overflow-hidden p-7 transition-all duration-300 ease-out group-hover:scale-[1.03] group-active:scale-[0.99] sm:p-9"
                   style={{
                     borderRadius: 20,
                     border: "1px solid rgba(255,255,255,0.1)",
@@ -246,27 +249,15 @@ export default function HomePage() {
 
                   {/* Play arrow indicator */}
                   <div
-                    className="absolute bottom-6 right-6 flex h-8 w-8 items-center justify-center rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-2"
+                    className="absolute bottom-5 right-5 inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-semibold tracking-wide text-white/85 transition-all duration-300 group-hover:translate-x-0.5"
                     style={{
-                      background: `${BORDER_COLORS[game.id]}20`,
-                      border: `1px solid ${BORDER_COLORS[game.id]}40`,
+                      background: `${BORDER_COLORS[game.id]}1f`,
+                      borderColor: `${BORDER_COLORS[game.id]}55`,
+                      fontFamily: "var(--font-body)",
                     }}
                   >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      style={{ color: BORDER_COLORS[game.id] }}
-                    >
-                      <path
-                        d="M2 7h10m0 0L8 3m4 4L8 11"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <span>Play</span>
+                    <span aria-hidden="true">&rarr;</span>
                   </div>
                 </div>
               </Link>
@@ -280,12 +271,12 @@ export default function HomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.35 }}
           onClick={handleRandomize}
-          className="group relative mb-10 flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-full border border-white/10 px-8 py-4 text-sm font-semibold tracking-wide transition-all duration-300 hover:border-white/20 hover:scale-105 active:scale-95 sm:w-auto"
+          className="btn-secondary group relative mb-10 w-full min-h-[52px] overflow-hidden rounded-2xl px-8 py-4 tracking-wide transition-all duration-300 sm:w-auto"
           style={{
-            fontFamily: "var(--font-mono)",
-            background: "rgba(255, 255, 255, 0.04)",
+            fontFamily: "var(--font-body)",
+            background: "rgba(255, 255, 255, 0.08)",
             backdropFilter: "blur(10px)",
-            color: "var(--lavender)",
+            color: "rgba(255,255,255,0.92)",
           }}
         >
           {/* Animated shimmer on hover */}

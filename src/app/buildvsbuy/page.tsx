@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { ShareCard } from "@/components/ShareCard";
 import { GameNav } from "@/components/GameNav";
 import { FloatingCTA } from "@/components/FloatingCTA";
@@ -401,7 +402,12 @@ export default function BuildVsBuyPage() {
           "linear-gradient(180deg, #050510 0%, #0d0525 40%, #1a0a3e 100%)",
       }}
     >
-      <div className="safe-floating-space flex flex-1 w-full max-w-3xl flex-col items-center justify-center px-4 py-8 pb-28 sm:px-6 sm:py-16 sm:pb-20 lg:px-8">
+      <div className="safe-floating-space flex w-full max-w-3xl flex-1 flex-col px-4 pt-12 pb-8 sm:px-6 sm:pt-14 sm:pb-12 lg:px-8">
+        <div className="mb-4 flex w-full items-center justify-start">
+          <Link href="/" className="btn-text">
+            &larr; Back to Hub
+          </Link>
+        </div>
         <AnimatePresence mode="wait">
           {/* ─── INTRO SCREEN ─────────────────────────────────── */}
           {phase === "intro" && (
@@ -411,7 +417,7 @@ export default function BuildVsBuyPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="flex flex-col items-center text-center w-full"
+              className="flex w-full flex-col items-center text-center"
             >
               <motion.h1
                 className="mb-4 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl"
@@ -433,7 +439,7 @@ export default function BuildVsBuyPage() {
               </motion.h1>
 
               <motion.p
-                className="text-lg sm:text-xl mb-8"
+                className="mb-8 max-w-md text-balance text-lg sm:text-xl"
                 style={{
                   color: "rgba(255,255,255,0.6)",
                   fontFamily: "var(--font-body)",
@@ -467,24 +473,21 @@ export default function BuildVsBuyPage() {
                   How It Works
                 </h3>
                 <ul
-                  className="text-sm text-left space-y-3.5"
+                  className="list-disc space-y-3 pl-4 text-left text-sm leading-relaxed marker:text-white/35 [&>li]:pl-1"
                   style={{
                     color: "rgba(255,255,255,0.6)",
                     fontFamily: "var(--font-body)",
-                    lineHeight: "1.7",
                   }}
                 >
+                  <li>You get a real AI infrastructure scenario each round</li>
                   <li>
-                    &#8226; You get a real AI infrastructure scenario each round
-                  </li>
-                  <li>
-                    &#8226; Choose <strong className="text-purple-400">Build</strong> or{" "}
+                    Choose <strong className="text-purple-400">Build</strong> or{" "}
                     <strong className="text-green-400">Buy</strong> before time runs out
                   </li>
                   <li>
-                    &#8226; Score points for speed and alignment with expert consensus
+                    Score points for speed and alignment with expert consensus
                   </li>
-                  <li>&#8226; Discover your founder archetype at the end</li>
+                  <li>Discover your founder archetype at the end</li>
                 </ul>
               </motion.div>
 
@@ -502,7 +505,7 @@ export default function BuildVsBuyPage() {
                 disabled={isLoading}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="min-h-[60px] w-full rounded-2xl px-10 py-5 text-lg font-bold cursor-pointer transition-all duration-300 disabled:cursor-not-allowed sm:w-auto sm:px-14"
+                className="btn-primary w-full min-h-[56px] rounded-2xl px-10 py-5 text-lg sm:w-auto sm:px-14"
                 style={{
                   background: isLoading
                     ? "rgba(255,255,255,0.08)"
@@ -594,7 +597,7 @@ export default function BuildVsBuyPage() {
                     boxShadow: "0 0 40px rgba(139,92,246,0.4)",
                   }}
                   whileTap={{ scale: 0.97 }}
-                  className="min-h-[56px] w-full rounded-2xl py-4 text-lg font-bold cursor-pointer transition-all duration-200 sm:min-h-[64px] sm:flex-1 sm:py-5 sm:text-xl"
+                  className="btn-primary min-h-[56px] w-full py-4 text-lg sm:min-h-[64px] sm:flex-1 sm:py-5 sm:text-xl"
                   style={{
                     background:
                       "linear-gradient(135deg, #6d28d9, #7c3aed, #8b5cf6)",
@@ -612,7 +615,7 @@ export default function BuildVsBuyPage() {
                     boxShadow: "0 0 40px rgba(34,197,94,0.4)",
                   }}
                   whileTap={{ scale: 0.97 }}
-                  className="min-h-[56px] w-full rounded-2xl py-4 text-lg font-bold cursor-pointer transition-all duration-200 sm:min-h-[64px] sm:flex-1 sm:py-5 sm:text-xl"
+                  className="btn-primary min-h-[56px] w-full py-4 text-lg sm:min-h-[64px] sm:flex-1 sm:py-5 sm:text-xl"
                   style={{
                     background:
                       "linear-gradient(135deg, #15803d, #16a34a, #22c55e)",
@@ -818,7 +821,7 @@ export default function BuildVsBuyPage() {
                       style={{
                         color:
                           currentRoundResult.points_earned > 0
-                            ? "#e8a530"
+                            ? "rgba(255,255,255,0.92)"
                             : "rgba(255,255,255,0.3)",
                         fontFamily: "var(--font-mono)",
                       }}
@@ -841,7 +844,7 @@ export default function BuildVsBuyPage() {
                 onClick={nextRound}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="w-full min-h-[56px] px-10 py-4 rounded-2xl text-base font-bold cursor-pointer transition-all duration-200 mt-2"
+                className="btn-primary mt-2 w-full min-h-[56px] px-10 py-4 text-base"
                 style={{
                   background:
                     "linear-gradient(135deg, #7c3aed, #8b5cf6)",
@@ -889,7 +892,7 @@ export default function BuildVsBuyPage() {
                 <p
                   className="text-6xl sm:text-7xl font-extrabold"
                   style={{
-                    color: "#e8a530",
+                    color: "rgba(255,255,255,0.92)",
                     fontFamily: "var(--font-display)",
                   }}
                 >
@@ -1023,7 +1026,7 @@ export default function BuildVsBuyPage() {
                         style={{
                           color:
                             result.points_earned > 0
-                              ? "#e8a530"
+                              ? "rgba(255,255,255,0.92)"
                               : "rgba(255,255,255,0.2)",
                           fontFamily: "var(--font-mono)",
                         }}
@@ -1050,7 +1053,7 @@ export default function BuildVsBuyPage() {
                   <p className="text-sm text-white/70 mt-1">
                     {archetype.description}
                   </p>
-                  <p className="text-2xl font-bold text-orange-400 mt-4">
+                  <p className="mt-4 text-2xl font-bold text-white/90">
                     {gameResults.score} pts
                   </p>
                 </ShareCard>
@@ -1077,11 +1080,12 @@ export default function BuildVsBuyPage() {
                   href="https://annual.aiboomi.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 hover:scale-105"
+                  className="btn-primary text-sm sm:px-6"
                   style={{
                     background: "linear-gradient(135deg, #e8a530, #f0b84a)",
                     color: "#0a0a2e",
                     fontFamily: "var(--font-body)",
+                    boxShadow: "0 0 26px rgba(232,165,48,0.28)",
                   }}
                 >
                   AIBoomi Annual, March 18-20, Chennai
@@ -1093,7 +1097,7 @@ export default function BuildVsBuyPage() {
                 onClick={playAgain}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="w-full max-w-sm min-h-[56px] px-10 py-3.5 rounded-2xl font-semibold cursor-pointer transition-all duration-200"
+                className="btn-secondary w-full max-w-sm min-h-[56px] rounded-2xl px-10 py-3.5 font-semibold"
                 style={{
                   background: "rgba(255,255,255,0.08)",
                   color: "rgba(255,255,255,0.7)",

@@ -18,8 +18,9 @@ export function FloatingCTA() {
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 1.5, duration: 0.6, ease: "easeOut" }}
-      className="safe-bottom z-50 mx-auto mb-8 mt-6 flex w-[calc(100%-2rem)] max-w-md items-center justify-center gap-2 rounded-full px-4 py-3 text-[11px] font-semibold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(232,165,48,0.4)] active:scale-[0.97] sm:fixed sm:bottom-6 sm:left-auto sm:right-8 sm:mx-0 sm:mb-0 sm:mt-0 sm:w-auto sm:max-w-none sm:justify-start sm:px-7 sm:py-3.5 sm:text-sm"
+      className="btn-primary fixed left-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 rounded-full px-4 py-3 text-[11px] font-semibold transition-all duration-300 hover:shadow-[0_0_30px_rgba(232,165,48,0.4)] sm:left-auto sm:right-8 sm:w-auto sm:translate-x-0 sm:px-7 sm:py-3.5 sm:text-sm"
       style={{
+        bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)",
         background: "linear-gradient(135deg, #e8a530, #f0b84a)",
         color: "#0a0a2e",
         fontFamily: "var(--font-body)",
